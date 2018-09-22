@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lineeducation-949ee",
+  "private_key_id": "4323881c6fda37f9ed20c3b8eaa4b3f6e2684ef6",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCs/Z1yQZTtznjd\n/mvB6QMdFWAUUrclgcRGDq8RDll6rS4UnBUKCw6HjNy+b6lPfraNT+6ByU6DyA3I\n9OmVOGfnYyWObqisgBtEGqVcwYivzTqdspZ9GuCNjqhHoUB/v8loa4JHhGih583t\nfVuFSAvGo2HXC0jC0Cn5+bzAe+xQcT+mrlxOqpwUlwwlEr/GH6N1xOmIlwH6iWnd\ncsT20Kx4uyBaLq1XGlP6duH8Y8YlMAAyXjI7+ZQU8KsHCnSyCyOWFcLkocxQgULB\nuLGuIg9jazh/iyvxzDxmTt1qCAqqzf5aRLNqTIx6JD48qK83I1+12GXPXTCw9+FH\n+cY5HnqtAgMBAAECggEAA6cevY7AGZloqxrKW/+3c0HouC5IquSDA8TWLc4p6BrQ\n6P7JBc2yQGrG5ezTro542A/nTz+0PSaz2Yd10hL2H9qKiAxp2oczsMLjR0u0CC7e\ngdkZr4m8d0VSCKJReQ7QZYGjFQqpJc6iirCKPXphjUanWKr5C6LpWSSoJT/K7Th0\n5Nb4wb7xSg/2WqEKTlUZniLmeDdJgQWbiGuzMbj9W/9Tyao9CSOsupLqts4/9t+6\nuOWUwAAlCGbxZWo+p8SAiJqLspBQNGisW3M4M79Ql3P7cmZpOkNsvmqMLiZjiRxY\ndZJsLYbBbQMBRfniAVL3nVXP0Ti9fGYC8LEJKd96nQKBgQDoE+yMsB7mno7bvqJo\ncHrz5g0tNUFPpqrMy9UtZJvXZS22jJ62Wuo6boo1Eozez/NUhmxeb8im0pF+mo0Z\n4Mxwtzqv8N6m3D3WL5gQsfpK9z/C7M6uHc/lmehCEesiuyFyB7a1MbuoOxY173Ae\nZKN9HtAV7vKMEFiHMCZBFtFd0wKBgQC+0n9ynxp9AwA11yg0/VPu/ugeDuFqfodh\nat6zWODU5M7OtA4oM6+Hkdtdf45ZyuUB0GkvVuaAb833lR8uhey+xQWQ6QfmWDhk\n9qEGBa3gFPWsDFPbH5QwMPtIDIFVphHlh4lcmhFxMvNk2mR29vKd5xStm4zJyOlC\nSMYYbfL1fwKBgA0iW4fWy9jnblRXZJ+ehgbZpTNCyVB1sULn4kewYvV8v2qOaMkP\nOiRWbzHzu888W5wUA3wQvX1be2p72rJ1O3zBkeu1KRSucD138hY3zF+DwLMKbeQC\nwepPnIposzMC/jCS6S82AlXSCj7BL0o5Ddud687h+A4fOrNj8TZL0UuLAoGAdbpG\nmP/iBriAO7dnffHBA9VOfaTum5Y+jfKyPPIbnB0iHlLl3RWuOLTbIv8cYveTfCAJ\nlQRHJ3xTFWlyGHDV1AiX24R5tDo/aMLkK2P7lyE3RJNCdRExit3dWeElNiNELVkG\nfRQsqKsnkNRQYTkQDC1SC53JKYEDsDpXxSCoYZ8CgYEAmGp3TR9TEoZNGxwwARId\nFE8IZaFwCCBUVEXLMFefVdMnp6Z2YNUolwKi9yNE7EK5+hClxH3rc7tFwUL5zS7+\nI7Ww1Ba8p3lfw+GYkEWwvb6bsBbMSSU+rOMSIb7h8xUCAQF4kaeAQ5XYtq+mOclO\nBXvx/obxvX3tyiY1s1/ZUKI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "dialogflow@lineeducation-949ee.iam.gserviceaccount.com",
+  "client_id": "111677642651575428927",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/dialogflow%40lineeducation-949ee.iam.gserviceaccount.com"
+}
