@@ -1,28 +1,15 @@
 {
-  "name": "server",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "actions-on-google": "^2.3.0",
-    "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
-    "dialogflow": "^0.6.0",
-    "dialogflow-fulfillment": "^0.5.0",
-    "express": "^4.16.3",
-    "foreman": "^3.0.1",
-    "localtunnel": "^1.9.1",
-    "marked": "^0.5.0",
-    "mongoose": "^5.2.17",
-    "nodemon": "^1.18.4",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-scripts": "1.1.5"
-  },
+  "name": "server2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "start-dev": "nf start -p 3000",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "concurrently \"cd backend && node server.js\" \"cd web && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^4.0.1"
   }
 }

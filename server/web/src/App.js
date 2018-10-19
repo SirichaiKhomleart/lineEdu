@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from './asset/lineLOGO.jpg';
-import './App.css';
 
 const liff = window.liff;
 
