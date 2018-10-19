@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-vm": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain mainserver3001\" \"cd web && lt --port 3000 --subdomain mainserver3000\"",
+    "start-vm": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain mainserverline3001\" \"cd web && lt --port 3000 --subdomain mainserverline3000\"",
     "start-mak": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain maklocalhost3001\" \"cd web && lt --port 3000 --subdomain maklocalhost3000\"",
     "start-nut": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain nutlocalhost3001\" \"cd web && lt --port 3000 --subdomain nutlocalhost3000\"",
     "start-poom": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain poomlocalhost3001\" \"cd web && lt --port 3000 --subdomain poomlocalhost3000\"",
