@@ -38,12 +38,12 @@ app.use(function(req, res, next) {
 });
 app.use('/api', router);
 
-// var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
-//     console.log(`api running on port ${apiPort}`); 
-// });
-app.listen(apiPort, function() {
-    console.log(`api running on port ${apiPort}`);
+var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
+    console.log(`api running on port ${apiPort}`); 
 });
+// app.listen(apiPort, function() {
+//     console.log(`api running on port ${apiPort}`);
+// });
 //Routing API
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized!'});
