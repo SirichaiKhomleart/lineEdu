@@ -10,6 +10,7 @@
     "dialogflow-fulfillment": "^0.5.0",
     "express": "^4.16.3",
     "foreman": "^3.0.1",
+    "localtunnel": "^1.9.1",
     "marked": "^0.5.0",
     "mongoose": "^5.2.17",
     "nodemon": "^1.18.4",
