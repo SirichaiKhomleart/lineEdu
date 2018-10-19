@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import logo from './asset/lineLOGO.jpg';
 import './App.css';
 
 const liff = window.liff;
@@ -50,10 +50,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+        <p className="App-intro" style={{marginTop: '50px'}}>
+          Welcome and Testing Liff
         </p>
         <button color="primary" onClick={this.closeApp}>Close</button>
       </div>

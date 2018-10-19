@@ -1,8 +1,6 @@
 1. npm run start-dev
-2. ngrok http 8080  //for webhook
-                    //port 3000 for web react
-
-
+2. lt --port 3001 --subdomain maklocalhost3001  //for webhook
+                                            //port 3000 for web react
 
 
 -- register liff
