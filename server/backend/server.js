@@ -17,7 +17,7 @@ var options = {
 var app = express();
 var router = express.Router();
 
-const apiPort = process.env.API_PORT || 3001;
+const apiPort = process.env.API_PORT || 3000;
 
 // const {WebhookClient} = require('dialogflow-fulfillment');
 // const agent = new WebhookClient({request: request, response: response});
@@ -38,12 +38,12 @@ app.use(function(req, res, next) {
 });
 app.use('/api', router);
 
-var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
-    console.log(`api running on port ${apiPort}`); 
-});
-// app.listen(apiPort, function() {
-//     console.log(`api running on port ${apiPort}`);
+// var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
+//     console.log(`api running on port ${apiPort}`); 
 // });
+app.listen(apiPort, function() {
+    console.log(`api running on port ${apiPort}`);
+});
 //Routing API
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized!'});

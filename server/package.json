@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && node server.js\" \"cd web && HTTPS=true && npm start\""
+    "start": "concurrently \"cd backend && node server.js && lt --port 3001 --subdomain mainserver3001\" \"cd web && npm start && lt --port 3000 --subdomain mainserver3000\""
   },
   "keywords": [],
   "author": "",
