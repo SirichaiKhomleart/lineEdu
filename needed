@@ -1,0 +1,37 @@
+**** start dev : npm start
+**** use localtunnel : lt --port 3001 --subdomain localhostmak3001  //for webhook
+                                                                    //port 3000 for web react
+
+
+******* MainServer = mainserverline3001.localtunnel.me
+        at ./lineEdu/server/backend : forever start localtunnel.js && forever start server.js
+
+******* Mak = localhostmak3001.localtunnel.me
+        at ./lineEdu/server : npm run start-mak
+
+******* Nut = localhostnut3001.localtunnel.me
+        at ./lineEdu/server : npm run start-nut
+
+******* Poom = localhostpoom3001.localtunnel.me
+        at ./lineEdu/server : npm run start-poom
+                             
+
+
+
+******* register liff
+curl -X POST https://api.line.me/liff/v1/apps \
+-H "Authorization: Bearer OJ3D0AttKuaKVKS4+zpihBarJ0e+YQ8y9NISQfonTvbCBw6Fzms7dEPifCsonk25u+9xMXGUhG31BPel4QW48aSkwiclb45M/rTSnejiAGnC0OmNz3Ai5SfOxtgxCe7KVOPdJZGRaokTXL8P1crXngdB04t89/1O/w1cDnyilFU=" \
+-H "Content-Type: application/json" \
+-d '{
+  "view":{
+    "type":"full",
+    "url":"https://6dcc5d6d.ngrok.io"
+  }
+}'
+
+
+
+******* deployment :
+at /lineEdu/server/web  : npm run build
+                        : cd ./build
+                        : mv -t /var/www/html [every files in build folder]

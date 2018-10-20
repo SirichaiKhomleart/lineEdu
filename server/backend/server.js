@@ -5,19 +5,28 @@ const mainServerFunction = require('./mainFunction/index.js');
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-
-// var Comment = require('./model/comments');
+var http = require('http')
+var https = require('https')
+// var fs = require('fs')
+// var options = {  
+//     key: fs.readFileSync('./key.pem', 'utf8'),  
+//     cert: fs.readFileSync('./server.crt', 'utf8')  
+// };
 
 var app = express();
 var router = express.Router();
+const apiPort = process.env.API_PORT || 3001;
 
-const port = process.env.API_PORT || 3001;
-
-const {WebhookClient} = require('dialogflow-fulfillment');
+// const {WebhookClient} = require('dialogflow-fulfillment');
 // const agent = new WebhookClient({request: request, response: response});
 
 // //db config
-// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds019836.mlab.com:19836/bryandb');
+mongoose.connect('mongodb://localhost:27017/lineEdu', { useNewUrlParser: true });
+let db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+var classroom = require('./model/classroom.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -31,13 +40,28 @@ app.use(function(req, res, next) {
     next();
 });
 app.use('/api', router);
-app.listen(port, function() {
-    console.log(`api running on port ${port}`);
-});
 
+// var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
+//     console.log(`api running on port ${apiPort}`); 
+// });
+app.listen(apiPort, function() {
+    console.log(`api running on port ${apiPort}`);
+});
 //Routing API
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized!'});
+});
+
+router.get('/testDB', function(req, res) {
+    let testClassroom = new classroom({ className: 'testing' });
+
+    testClassroom.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("testing insert is completed")
+        }
+    })
 });
 
 // router.route('/').get(function(req, res) {
@@ -74,6 +98,7 @@ router.get('/', function(req, res) {
 // First post from LINE
 app.post('/webhook', async (req, res) => {
     res.send("200")
+    console.log("incoming message");
     if (!(req && req.body && req.body.passing)) {
         if (req.body.events[0].message.text.startsWith("Mak:")) {
             console.log("in Mak with message: " + req.body.events[0].message.text.substring(4))
