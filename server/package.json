@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start-vm": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain mainserverline3001\" \"cd web && lt --port 3000 --subdomain mainserverline3000\"",
-    "start-mak": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain maklocalhost3001\" \"cd web && lt --port 3000 --subdomain maklocalhost3000\"",
-    "start-nut": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain nutlocalhost3001\" \"cd web && lt --port 3000 --subdomain nutlocalhost3000\"",
-    "start-poom": "concurrently \"cd backend && node server.js\" \"cd web && npm start\" \"cd backend && lt --port 3001 --subdomain poomlocalhost3001\" \"cd web && lt --port 3000 --subdomain poomlocalhost3000\"",
-    "build-vm": "concurrently \"cd web && npm run build\" \"cd backend && forever start server.js && forever start localtunnel.js\""
+    "start-vm": "concurrently \"cd backend && node server.js\" \"cd web && npm start\"",
+    "start-mak": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelMak.js\" \"cd web && npm start\"",
+    "start-nut": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelNut.js\" \"cd web && npm start\"",
+    "start-poom": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelPoom.js\" \"cd web && npm start\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^4.0.1"
+    "concurrently": "^4.0.1",
+    "localtunnel": "^1.9.1"
   }
 }

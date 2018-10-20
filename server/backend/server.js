@@ -7,23 +7,26 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var http = require('http')
 var https = require('https')
-var fs = require('fs')
-var options = {  
-    key: fs.readFileSync('./key.pem', 'utf8'),  
-    cert: fs.readFileSync('./server.crt', 'utf8')  
-};
-// var Comment = require('./model/comments');
+// var fs = require('fs')
+// var options = {  
+//     key: fs.readFileSync('./key.pem', 'utf8'),  
+//     cert: fs.readFileSync('./server.crt', 'utf8')  
+// };
 
 var app = express();
 var router = express.Router();
-
 const apiPort = process.env.API_PORT || 3001;
 
 // const {WebhookClient} = require('dialogflow-fulfillment');
 // const agent = new WebhookClient({request: request, response: response});
 
 // //db config
-// mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds019836.mlab.com:19836/bryandb');
+mongoose.connect('mongodb://localhost:27017/lineEdu', { useNewUrlParser: true });
+let db = mongoose.connection;
+db.once("open", () => console.log("connected to the database"));
+db.on("error", console.error.bind(console, "MongoDB connection error:"));
+
+var classroom = require('./model/classroom.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -47,6 +50,18 @@ app.listen(apiPort, function() {
 //Routing API
 router.get('/', function(req, res) {
     res.json({ message: 'API Initialized!'});
+});
+
+router.get('/testDB', function(req, res) {
+    let testClassroom = new classroom({ className: 'testing' });
+
+    testClassroom.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("testing insert is completed")
+        }
+    })
 });
 
 // router.route('/').get(function(req, res) {
