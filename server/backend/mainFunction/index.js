@@ -68,7 +68,7 @@ async function passToMak(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostserver3001mak.localtunnel.me/webhook',
+		url: 'https://localhostmak3001.localtunnel.me/webhook',
 		headers: {
             'Content-Type': 'application/json'
         },
@@ -90,7 +90,7 @@ async function passToPoom(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostserver3001poom.localtunnel.me/webhook',
+		url: 'https://localhostpoom3001.localtunnel.me/webhook',
 		headers: {
             'Content-Type': 'application/json'
         },
@@ -112,7 +112,7 @@ async function passToNut(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostserver3001nut.localtunnel.me/webhook',
+		url: 'https://localhostnut3001.localtunnel.me/webhook',
 		headers: {
             'Content-Type': 'application/json'
         },

@@ -1,18 +1,18 @@
 **** start dev : npm start
-**** use localtunnel : lt --port 3001 --subdomain localhostserver3001mak  //for webhook
+**** use localtunnel : lt --port 3001 --subdomain localhostmak3001  //for webhook
                                                                     //port 3000 for web react
 
 
 ******* MainServer = mainserverline3001.localtunnel.me
         at ./lineEdu/server/backend : forever start localtunnel.js && forever start server.js
 
-******* Mak = localhostserver3001mak.localtunnel.me
+******* Mak = localhostmak3001.localtunnel.me
         at ./lineEdu/server : npm run start-mak
 
-******* Nut = localhostserver3001nut.localtunnel.me
+******* Nut = localhostnut3001.localtunnel.me
         at ./lineEdu/server : npm run start-nut
 
-******* Poom = localhostserver3001poom.localtunnel.me
+******* Poom = localhostpoom3001.localtunnel.me
         at ./lineEdu/server : npm run start-poom
                              
 

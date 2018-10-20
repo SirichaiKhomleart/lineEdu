@@ -1,11 +1,11 @@
 const localtunnel = require('localtunnel')
 
 const tunels = [{
-  subdomain: 'localhostserver3000nut',
+  subdomain: 'localhostnut3000',
   local_host: 'localhost',
   port: 3000,
 }, {
-  subdomain: 'localhostserver3001nut',
+  subdomain: 'localhostnut3001',
   local_host: 'localhost',
   port: 3001,
 }]

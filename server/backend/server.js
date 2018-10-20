@@ -98,6 +98,7 @@ router.get('/testDB', function(req, res) {
 // First post from LINE
 app.post('/webhook', async (req, res) => {
     res.send("200")
+    console.log("incoming message");
     if (!(req && req.body && req.body.passing)) {
         if (req.body.events[0].message.text.startsWith("Mak:")) {
             console.log("in Mak with message: " + req.body.events[0].message.text.substring(4))
