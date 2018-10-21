@@ -38,3 +38,20 @@ const run = async (options, key) => {
 tunels.forEach((options, key) => {
   run(options, key)
 })
+
+function setLocalhost(url){
+  request.post({
+  url: `http://35.186.146.98:3001/getConnect`,
+    headers: {
+            'Content-Type': 'application/json'
+        },
+        json: true,
+    body: {
+      source: "mak",
+      localhost: url
+    }
+  }, (err, res, body) => {
+        console.log('err :' + err)
+        console.log('res :'+res)
+    })
+}
