@@ -1,4 +1,5 @@
 const localtunnel = require('localtunnel')
+const request = require('request') 
 
 const tunels = [{
   subdomain: 'localhostmak3000',
@@ -17,7 +18,10 @@ const run = async (options, key) => {
     if (err) {
       run(options, key)
     } else {
-      console.log('Running', tl.url)
+      console.log('Running port-'+options.port+" on url: "+tl.url)
+      if (options.port == 3001) {
+        setLocalhost(tl.url)
+      }
     }
   })
 
@@ -35,3 +39,20 @@ const run = async (options, key) => {
 tunels.forEach((options, key) => {
   run(options, key)
 })
+
+function setLocalhost(url){
+  request.post({
+  url: `http://localhost:3001/getConnect`,
+    headers: {
+            'Content-Type': 'application/json'
+        },
+        json: true,
+    body: {
+      source: "mak",
+      localhost: url
+    }
+  }, (err, res, body) => {
+        console.log('err :' + err)
+        console.log('res :'+res)
+    })
+}

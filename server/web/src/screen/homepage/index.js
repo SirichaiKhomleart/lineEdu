@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
-import { HomePage } from './screen/homepage/index.js'
-import CreateClassroom from './screen/createClassroom/index.js'
+import logo from '../../asset/lineLOGO.jpg'
 
 const liff = window.liff
 
-class App extends Component {
+export class HomePage extends Component {
 
   constructor(props) {
     super(props)
@@ -48,11 +46,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/" component={HomePage}></Route>
-        <Route exact path="/createClassroom" component={CreateClassroom}></Route>
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+        </header>
+        <p className="App-intro" style={{marginTop: '50px'}}>
+          Welcome and Testing Liff
+        </p>
+        <button color="primary" onClick={this.closeApp}>Close</button>
       </div>
     );
   }
 }
-
-export default App;

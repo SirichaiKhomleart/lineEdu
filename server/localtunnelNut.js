@@ -17,7 +17,10 @@ const run = async (options, key) => {
     if (err) {
       run(options, key)
     } else {
-      console.log('Running', tl.url)
+      console.log('Running port-'+options.port+" on url: "+tl.url)
+      if (options.port == 3001) {
+        setLocalhost(tl.url)
+      }
     }
   })
 

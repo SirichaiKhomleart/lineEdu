@@ -5,6 +5,10 @@ const HEADERS = {
 	'Authorization': 'Bearer svGsqRZqRcnxR0tOJZXWqZxiioJXQGv7btlA4iyuAT5KWbqTg+9y6N5i1J6ir/x2u+9xMXGUhG31BPel4QW48aSkwiclb45M/rTSnejiAGmiQN0j+ZwcJYBH/IKvBLM/maV/yWBuh1eThXdOwVt4iFGUYhWQfeY8sLGRXgo3xvw='
 }
 
+var makLocalhost = ""
+var nutLocalhost = ""
+var poomLocalhost = ""
+
 function curl(method, body) {
 	request.post({
 		url: 'https://api.line.me/v2/bot/message/' + method,
@@ -43,6 +47,25 @@ function replyText(reply_token, msg) {
 	curl('reply', body);
 }
 
+function setLocalhost(source,url){
+    switch (source) {
+        case "mak":
+            makLocalhost = url
+            console.log(makLocalhost + " is recorded.")
+            break;
+        case "nut":
+            nutLocalhost = url
+            console.log(nutLocalhost + " is recorded.")
+            break;
+        case "poom":
+            poomLocalhost = url
+            console.log(poomLocalhost + " is recorded.")
+            break;
+        default:
+            console.log("not match");
+    }
+}
+
 async function mainServerHandle(body){
     console.log("in main function")
     let reply_token = body.replyToken;
@@ -68,7 +91,7 @@ async function passToMak(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostmak3001.localtunnel.me/webhook',
+		url: `${makLocalhost}/webhook`,
 		headers: {
             'Content-Type': 'application/json'
         },
@@ -90,7 +113,7 @@ async function passToPoom(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostpoom3001.localtunnel.me/webhook',
+		url: `${poomLocalhost}/webhook`,
 		headers: {
             'Content-Type': 'application/json'
         },
@@ -112,7 +135,7 @@ async function passToNut(passBody){
     passBody = {...passBody, passing: true}
     let isLocalhostTurnOn = false
     await request.post({
-		url: 'https://localhostnut3001.localtunnel.me/webhook',
+		url: `${nutLocalhost}/webhook`,
 		headers: {
             'Content-Type': 'application/json'
         },
@@ -131,5 +154,5 @@ async function passToNut(passBody){
 }
 
 module.exports = {
-    mainServerHandle,passToMak,passToNut,passToPoom
+    mainServerHandle,passToMak,passToNut,passToPoom,setLocalhost
 };

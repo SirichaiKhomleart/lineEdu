@@ -7,11 +7,11 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var http = require('http')
 var https = require('https')
-// var fs = require('fs')
-// var options = {  
-//     key: fs.readFileSync('./key.pem', 'utf8'),  
-//     cert: fs.readFileSync('./server.crt', 'utf8')  
-// };
+var fs = require('fs')
+var options = {  
+    key: fs.readFileSync('./key.pem', 'utf8'),  
+    cert: fs.readFileSync('./server.crt', 'utf8')  
+};
 
 var app = express();
 var router = express.Router();
@@ -63,6 +63,17 @@ router.get('/testDB', function(req, res) {
         }
     })
 });
+
+app.post('/getConnect', async (req, res) => {
+    console.log("new localhost is connecting ....");
+    if (req && req.body && req.body.source) {
+        mainServerFunction.setLocalhost(req.body.source,req.body.localhost)
+        res.send("setting")
+    } else {
+        console.log("no match localhost source");
+        res.send("incomplete connection")
+    }
+})
 
 // router.route('/').get(function(req, res) {
 //     // do what for get request in /api/
