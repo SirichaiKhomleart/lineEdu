@@ -75,6 +75,18 @@ app.post('/getConnect', async (req, res) => {
     }
 })
 
+router.post('/insertClassroom', async (req, res) => {
+    console.log("coming request");
+    let newClass = new classroom(req.body)
+    newClass.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("classroom is inserted")
+        }
+    });
+})
+
 // router.route('/').get(function(req, res) {
 //     // do what for get request in /api/
 //     //res.json({ message: 'API Initialized!'});

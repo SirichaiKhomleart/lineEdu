@@ -4,9 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var classroomSchema = new Schema({
-    classID: {
-        type: String
-    },
     className: {
         type: String
     },
@@ -23,7 +20,8 @@ var classroomSchema = new Schema({
         type: Array
     },
     classCreatedTimeStamp: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     classStatus: {
         type: String
@@ -31,6 +29,9 @@ var classroomSchema = new Schema({
     classScore: {
         type: Array
     },
+    classMoreDetailList: {
+        type: Array
+    }
 });
 
-module.exports = mongoose.model('classroom', classroomSchema);
+module.exports = mongoose.model('classroom', classroomSchema, 'classrooms');

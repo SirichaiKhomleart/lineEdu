@@ -8,10 +8,14 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.1.3",
     "localtunnel": "^1.9.1",
+    "material-design-icons": "^3.0.1",
+    "material-ui-form": "^1.0.0-alpha.26",
+    "moment": "^2.22.2",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
+    "shortid": "^2.2.13",
     "styled-components": "^4.0.2"
   },
   "scripts": {
