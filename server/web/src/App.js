@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route } from 'react-router-dom'
+import { Route,Router } from 'react-router-dom'
 import { HomePage } from './screen/homepage/index.js'
 import CreateClassroom from './screen/createClassroom/index.js'
 import SuccessCreateClass from './screen/successCreateClass/index.js'
@@ -19,10 +19,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Route exact path="/" component={HomePage}></Route>
-        <Route exact path="/createClassroom" component={CreateClassroom}></Route>
-        <Route exact path="/successCreateClass" component={SuccessCreateClass}></Route>
-        <Route exact path="/addUser" component={AddUser}></Route>
+        <Router basename={'/reactjs'}>
+          <Route exact path={`${process.env.PUBLIC_URL}/`} component={HomePage}></Route>
+          <Route exact path={`${process.env.PUBLIC_URL}/createClassroom`} component={CreateClassroom}></Route>
+          <Route exact path={`${process.env.PUBLIC_URL}/successCreateClass`} component={SuccessCreateClass}></Route>
+          <Route exact path={`${process.env.PUBLIC_URL}/addUser`} component={AddUser}></Route>
+        </Router>
       </div>
     );
   }
