@@ -1,7 +1,6 @@
 {
   "name": "web",
   "version": "0.1.0",
-  "private": true,
   "dependencies": {
     "@material-ui/core": "^3.2.2",
     "@material-ui/icons": "^3.0.1",
@@ -30,6 +29,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "proxy": "http://localhost:3001",
-  "homepage": "https://35.186.146.98/directory-name"
+  "proxy": "http://localhost:3001"
 }
