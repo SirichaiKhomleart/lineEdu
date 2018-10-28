@@ -1,6 +1,7 @@
 'use strict'
 
 const mainServerFunction = require('./mainFunction/index.js');
+const passLocalFunction = require('./mainFunction/passLocalFunction.js');
 
 var express = require('express');
 var mongoose = require('mongoose');
@@ -27,6 +28,7 @@ db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
 var classroom = require('./model/classroom.js');
+var user = require('./model/user.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -53,21 +55,22 @@ router.get('/', function(req, res) {
 });
 
 router.get('/testDB', function(req, res) {
-    let testClassroom = new classroom({ className: 'testing' });
+    // let testClassroom = new classroom({ className: 'testing' });
 
-    testClassroom.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send("testing insert is completed")
-        }
-    })
+    // testClassroom.save((err) => {
+    //     if (err) {
+    //         console.log(err);
+    //     } else {
+    //         res.send("testing insert is completed")
+    //     }
+    // })
+    mainServerFunction.addNewUser();
 });
 
 app.post('/getConnect', async (req, res) => {
     console.log("new localhost is connecting ....");
     if (req && req.body && req.body.source) {
-        mainServerFunction.setLocalhost(req.body.source,req.body.localhost)
+        passLocalFunction.setLocalhost(req.body.source,req.body.localhost)
         res.send("setting")
     } else {
         console.log("no match localhost source");
@@ -76,13 +79,30 @@ app.post('/getConnect', async (req, res) => {
 })
 
 router.post('/insertClassroom', async (req, res) => {
-    console.log("coming request");
+    console.log("insertClassroom coming request");
     let newClass = new classroom(req.body)
     newClass.save((err) => {
         if (err) {
             console.log(err);
         } else {
             res.send("classroom is inserted")
+        }
+    });
+    user.update(
+        { userID: req.body.userID },
+        { $push: { userCoClassList: newClass._id } },
+        done
+    )
+})
+
+router.post('/addUser', async (req, res) => {
+    console.log("addUser coming request");
+    let newUser = new user(req.body)
+    newUser.save((err) => {
+        if (err) {
+            console.log(err);
+        } else {
+            res.send("user is inserted")
         }
     });
 })
@@ -122,19 +142,26 @@ router.post('/insertClassroom', async (req, res) => {
 app.post('/webhook', async (req, res) => {
     res.send("200")
     console.log("incoming message");
+    if (req.body.events && req.body.events[0].type == "follow") {
+        mainServerFunction.addNewUser(req.body.events[0])
+    } else if (req.body.events && req.body.events[0].type == "join") {
+        mainServerFunction.joinGroup(req.body.events[0])
+    } else if (req.body.events && req.body.events[0].type == "leave") {
+        mainServerFunction.leaveGroup(req.body.events[0])
+    }
     if (!(req && req.body && req.body.passing)) {
         if (req.body.events[0].message.text.startsWith("Mak:")) {
             console.log("in Mak with message: " + req.body.events[0].message.text.substring(4))
             req.body.events[0].message.text = req.body.events[0].message.text.substring(4)
-            mainServerFunction.passToMak(req.body)
+            passLocalFunction.passToMak(req.body)
         } else if (req.body.events[0].message.text.startsWith("Nut:")) {
             console.log("in Nut with message: " + req.body.events[0].message.text.substring(4))
             req.body.events[0].message.text = req.body.events[0].message.text.substring(4)
-            mainServerFunction.passToNut(req.body)
+            passLocalFunction.passToNut(req.body)
         } else if (req.body.events[0].message.text.startsWith("Poom:")) {
             console.log("in Poom with message: " + req.body.events[0].message.text.substring(5))
             req.body.events[0].message.text = req.body.events[0].message.text.substring(5)
-            mainServerFunction.passToPoom(req.body)
+            passLocalFunction.passToPoom(req.body)
         } else {
             mainServerFunction.mainServerHandle(req.body.events[0])
         }

@@ -18,17 +18,20 @@ const theme = createMuiTheme({
   overrides: {
     MuiFormLabel: {
       root: {
-        color: 'green',
+        color: '#11336C',
         fontSize: "20px",
         fontWeight: "500",
         '&$focused': {
-          color: 'green',
+          color: '#11336C',
         }
       }
     },
     MuiNotchedOutline: {
+      root: {
+        borderColor: "#11336C"
+      },
       focused: {
-        borderColor: "green"
+        borderColor: "#11336C"
       }
     }
   }
@@ -37,20 +40,21 @@ const themeDesc = createMuiTheme({
   overrides: {
     MuiFormLabel: {
       root: {
-        color: 'green',
+        color: '#11336C',
         fontSize: "20px",
         fontWeight: "500",
         '&$focused': {
-          color: 'green',
+          color: '#11336C',
         }
       }
     },
     MuiNotchedOutline: {
       focused: {
-        borderColor: "green"
+        borderColor: "#11336C"
       },
       root: {
-        minHeight: "130px"
+        minHeight: "130px",
+        borderColor: "#11336C"
       }
     }
   }
@@ -76,7 +80,7 @@ const themeButton = createMuiTheme({
         color: 'white',
         fontSize: "18px",
         fontWeight: "300",
-        backgroundColor: "green",
+        backgroundColor: "#11336C",
         height: "50px"
       }
     }
@@ -92,8 +96,8 @@ class CreateClassroom extends Component {
       classDesc: "",
       scoreSection: [
         {
-          sectionName: "ss",
-          score: "23"
+          sectionName: "",
+          score: ""
         }
       ],
       moreInfo: [],
@@ -104,13 +108,13 @@ class CreateClassroom extends Component {
     this.closeApp = this.closeApp.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     window.addEventListener('load', this.initialize);
   }
 
   initialize() {
     liff.init(async (data) => {
-      let profile = await liff.getProfile()
+      let profile = await liff.getProfile();
       this.setState({
         userId: profile.userId
       })
@@ -211,13 +215,20 @@ class CreateClassroom extends Component {
       classMoreDetailList: moreInfo,
       classStatus: "active",
       classOwner: userId,
-      classPublicKey: shortid.generate()
+      classPublicKey: shortid.generate(),
+      classPrivateKey: [shortid.generate()]
     }
     console.log("before send ",insertData);
     insertClassroom(insertData, (result) => {
       console.log(result);
     })
-    
+    this.props.history.push({
+      pathname: '/successCreateClass',
+      state: {
+        classPublicKey: insertData.classPublicKey,
+        classPrivateKey: insertData.classPrivateKey[0]
+      }  
+    })
   }
 
   renderChipMoreInfo = () => {
@@ -289,7 +300,7 @@ class CreateClassroom extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-          <h3><p> Create new classroom </p></h3>
+          <h3><p style={{color:"#11336C"}}> Create new classroom </p></h3>
           <MaterialUIForm onSubmit={this.submitForm} style={{display: 'flex', flexWrap: 'wrap'}}>
             <Grid item xs={12}>
               <MuiThemeProvider theme={theme}>
@@ -326,21 +337,21 @@ class CreateClassroom extends Component {
                 </MuiThemeProvider>
                 <div style={{paddingLeft: "17px"}}>
                   <FormControl required>
-                    <p style={{color: "green", fontSize: "16px", fontWeight: "500"}}>Score Section</p>
+                    <p style={{color: "#11336C", fontSize: "16px", fontWeight: "500"}}>Score Section</p>
                     <MuiThemeProvider theme={themeSubTextField}>
-                      <div style={{display: "flex", flexDirection: "column"}}>
+                      <div style={{display: "flex", flexDirection: "column", paddingLeft: "15px"}}>
                         {this.renderScoreSection()}
                       </div>
                     </MuiThemeProvider>
                     <div style={{display: "flex", justifyContent: "center", paddingRight: "30px", paddingTop: "10px"}}>
-                      <Icon style={{color: "green", fontSize: "35px"}} onClick={this.addScoreSection}>
+                      <Icon style={{color: "#11336C", fontSize: "35px"}} onClick={this.addScoreSection}>
                         add_circle_outline
                       </Icon>
                     </div>
                   </FormControl>
                 </div>
                 <div style={{paddingLeft: "17px",paddingRight: "17px"}}>
-                  <p style={{color: "green", fontSize: "16px", fontWeight: "500"}}>More required information from students</p>
+                  <p style={{color: "#11336C", fontSize: "16px", fontWeight: "500"}}>More required information from students</p>
                   <MuiThemeProvider theme={themeSubTextField}>
                     <div style={{display: "flex", flexDirection: "column"}}>
                       <Paper style={{padding: "10px"}}>

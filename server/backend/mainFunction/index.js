@@ -1,158 +1,83 @@
 const dialogflowFunction = require('../dialogflow/index.js');
+const messageFunction = require('./messageFunction.js');
 const request = require('request') 
 const HEADERS = {
 	'Content-Type': 'application/json',
 	'Authorization': 'Bearer svGsqRZqRcnxR0tOJZXWqZxiioJXQGv7btlA4iyuAT5KWbqTg+9y6N5i1J6ir/x2u+9xMXGUhG31BPel4QW48aSkwiclb45M/rTSnejiAGmiQN0j+ZwcJYBH/IKvBLM/maV/yWBuh1eThXdOwVt4iFGUYhWQfeY8sLGRXgo3xvw='
 }
-
-var makLocalhost = ""
-var nutLocalhost = ""
-var poomLocalhost = ""
-
-function curl(method, body) {
-	request.post({
-		url: 'https://api.line.me/v2/bot/message/' + method,
-		headers: HEADERS,
-		body: body
-	}, (err, res, body) => {
-		console.log('status = ' + res.statusCode)
-	})
-}
-
-function push(msg) {
-	let body = JSON.stringify({
-		// push body
-		to: 'Uc9e7b76b053d02ed8627898987f219a3',
-		messages: [
-			{
-				type: 'text',
-				text: msg
-			}
-		]
-	})
-	curl('push', body)
-}
-
-function replyText(reply_token, msg) {
-	let body = JSON.stringify({
-		// reply body
-		replyToken: reply_token,
-		messages: [
-			{
-                type: 'text',
-                text: msg
-            }
-		]
-	})
-	curl('reply', body);
-}
-
-function setLocalhost(source,url){
-    switch (source) {
-        case "mak":
-            makLocalhost = url
-            console.log(makLocalhost + " is recorded.")
-            break;
-        case "nut":
-            nutLocalhost = url
-            console.log(nutLocalhost + " is recorded.")
-            break;
-        case "poom":
-            poomLocalhost = url
-            console.log(poomLocalhost + " is recorded.")
-            break;
-        default:
-            console.log("not match");
-    }
-}
+var user = require('../model/user.js');
 
 async function mainServerHandle(body){
     console.log("in main function")
     let reply_token = body.replyToken;
-	let incomingMsg = body.message.text;
-    await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
-        switch (result.intent.displayName) {
-            case 'createClassroom':
-                console.log("intent create class");
-                break;
-            case 'joinClassroom':
-                console.log("intent join class");
-                break;
-            case 'createAnnouncement':
-                console.log("intent create ann");
-                break;
-            default:
-                replyText(reply_token,"not in any intent.")
-        }
-    });
+    let incomingMsg = body.message.text;
+    let userId = body.source.userId;
+    if (checkRegistedUser(userId)) {
+        await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
+            switch (result.intent.displayName) {
+                case 'createClassroom':
+                let replyMessage = {
+                    "type": "template",
+                    "template": {
+                        "type": "confirm",
+                        "actions": [
+                            {
+                            "type": "uri",
+                            "label": "OK",
+                            "uri": "line://app/1609431105-rmEDzO4P"
+                            }
+                        ],
+                        "text": "You can fill the form in this link to create a new classroom."
+                        }
+                    }
+                    messageFunction.replyTemplate(reply_token,replyMessage)
+                    break;
+                case 'joinClassroom':
+                    console.log("intent join class");
+                    break;
+                case 'createAnnouncement':
+                    console.log("intent create ann");
+                    break;
+                default:
+                messageFunction.replyText(reply_token,"not in any intent.")
+            }
+        });
+    } else {
+        messageFunction.replyText(reply_token,"Please, fill some information before start use our service in this link: line://app/1609431105-wDVgOl4L")
+    }
 }
 
-async function passToMak(passBody){
-    passBody = {...passBody, passing: true}
-    let isLocalhostTurnOn = false
-    await request.post({
-		url: `${makLocalhost}/webhook`,
-		headers: {
-            'Content-Type': 'application/json'
-        },
-        json: true,
-		body: passBody
-	}, (err, res, body) => {
-        console.log('mak localhost:')
-        if (body != '404') {
-            isLocalhostTurnOn = true
+function checkRegistedUser(userId) {
+    user.findOne({ userID: userID }, (err, data) => {
+        if (data == null) {
+            return true
+        } else {
+            return false
         }
-        console.log('err :' + err)
-        console.log('res :'+res)
-        console.log('body :'+body)
     })
-    return isLocalhostTurnOn
 }
 
-async function passToPoom(passBody){
-    passBody = {...passBody, passing: true}
-    let isLocalhostTurnOn = false
-    await request.post({
-		url: `${poomLocalhost}/webhook`,
-		headers: {
-            'Content-Type': 'application/json'
-        },
-        json: true,
-		body: passBody
-	}, (err, res, body) => {
-        console.log('poom localhost:')
-        console.log('err :' + err)
-        console.log('res :'+res)
-        console.log('body :'+body)
-        if (body != '404') {
-            isLocalhostTurnOn = true
+function addNewUser(message) {
+    let { userID } = message.source.userId
+    let { reply_token } = message.reply_token
+    user.findOne({ userID: userID }, (err, data) => {
+        if (data == null) {
+            messageFunction.replyText(reply_token,"welcome to LINE Education. Please, fill some information before start use our service in this link: line://app/1609431105-wDVgOl4L")
+        } else {
+            messageFunction.replyText(reply_token,"welcome back to LINE Education.")
+
         }
     })
-    return isLocalhostTurnOn
 }
 
-async function passToNut(passBody){
-    passBody = {...passBody, passing: true}
-    let isLocalhostTurnOn = false
-    await request.post({
-		url: `${nutLocalhost}/webhook`,
-		headers: {
-            'Content-Type': 'application/json'
-        },
-        json: true,
-		body: passBody
-	}, (err, res, body) => {
-        console.log('nut localhost:')
-        console.log('err :' + err)
-        console.log('res :'+res)
-        console.log('body :'+body)
-        if (body != '404') {
-            isLocalhostTurnOn = true
-        }
-    })
-    return isLocalhostTurnOn
+function joinGroup(message) {
+    
+}
+
+function leaveGroup(message) {
+    
 }
 
 module.exports = {
-    mainServerHandle,passToMak,passToNut,passToPoom,setLocalhost
+    mainServerHandle,addNewUser,joinGroup,leaveGroup
 };
