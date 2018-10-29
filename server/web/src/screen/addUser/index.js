@@ -20,7 +20,7 @@ const theme = createMuiTheme({
         }
       }
     },
-    MuiNotchedOutline: {
+    MuiPrivateNotchedOutline: {
       root: {
         borderColor: "#27973D"
       },

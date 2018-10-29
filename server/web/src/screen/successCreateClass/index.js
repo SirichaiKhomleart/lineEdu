@@ -18,18 +18,18 @@ const theme = createMuiTheme({
   overrides: {
     MuiFormLabel: {
       disabled: {
-        color: '#11336C',
+        color: '#73c96e',
         fontSize: "20px",
         fontWeight: "500",
         backgroundColor: "white",
         '&$disabled': {
-          color: '#11336C',
+          color: '#73c96e',
         }
       }
     },
-    MuiNotchedOutline: {
+    MuiPrivateNotchedOutline: {
       disabled: {
-        borderColor: "#11336C"
+        borderColor: "#73c96e"
       }
     },
     MuiOutlinedInput: {
@@ -54,7 +54,7 @@ class SuccessCreateClass extends Component {
 
   componentDidMount() {
     let { classPublicKey, classPrivateKey } = this.props.location.state
-    // let classPubilcKey = "studentt"
+    // let classPublicKey = "studentt"
     // let classPrivateKey = "adminnn"
     window.addEventListener('load', this.initialize);
     this.setState({
@@ -86,13 +86,13 @@ class SuccessCreateClass extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-            <h2><p style={{color: "#11336C"}}> New Classroom Success </p></h2>
+            <h2><p> New Classroom Success </p></h2>
             <FlexCenter>
               <FlexCenter flexDirection="row" >
                 <img src={Success} style={{height: "150px"}}/>
               </FlexCenter>
               <FlexCenter flexDirection="row">
-                <p style={{color: "#11336C", fontWeight: "500"}}> Your new classroom was created.</p>
+                <p style={{color: "#73c96e", fontWeight: "500"}}> Your new classroom was created.</p>
               </FlexCenter>
             </FlexCenter>
             <Grid item xs={12} style={{paddingTop: "15px"}}>

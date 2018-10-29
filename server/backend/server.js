@@ -6,7 +6,6 @@ const passLocalFunction = require('./mainFunction/passLocalFunction.js');
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var http = require('http')
 var https = require('https')
 var fs = require('fs')
 var options = {  
@@ -16,6 +15,7 @@ var options = {
 
 var app = express();
 var router = express.Router();
+const routes = require('./routes/index')
 const apiPort = process.env.API_PORT || 3001;
 
 // const {WebhookClient} = require('dialogflow-fulfillment');
@@ -26,9 +26,6 @@ mongoose.connect('mongodb://localhost:27017/lineEdu', { useNewUrlParser: true })
 let db = mongoose.connection;
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
-var classroom = require('./model/classroom.js');
-var user = require('./model/user.js');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -41,6 +38,7 @@ app.use(function(req, res, next) {
     res.setHeader('Cache-Control', 'no-cache');
     next();
 });
+routes(router)
 app.use('/api', router);
 
 // var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
@@ -48,23 +46,6 @@ app.use('/api', router);
 // });
 app.listen(apiPort, function() {
     console.log(`api running on port ${apiPort}`);
-});
-//Routing API
-router.get('/', function(req, res) {
-    res.json({ message: 'API Initialized!'});
-});
-
-router.get('/testDB', function(req, res) {
-    // let testClassroom = new classroom({ className: 'testing' });
-
-    // testClassroom.save((err) => {
-    //     if (err) {
-    //         console.log(err);
-    //     } else {
-    //         res.send("testing insert is completed")
-    //     }
-    // })
-    mainServerFunction.addNewUser();
 });
 
 app.post('/getConnect', async (req, res) => {
@@ -77,66 +58,6 @@ app.post('/getConnect', async (req, res) => {
         res.send("incomplete connection")
     }
 })
-
-router.post('/insertClassroom', async (req, res) => {
-    console.log("insertClassroom coming request");
-    let newClass = new classroom(req.body)
-    newClass.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send("classroom is inserted")
-        }
-    });
-    user.update(
-        { userID: req.body.userID },
-        { $push: { userCoClassList: newClass._id } },
-        done
-    )
-})
-
-router.post('/addUser', async (req, res) => {
-    console.log("addUser coming request");
-    let newUser = new user(req.body)
-    newUser.save((err) => {
-        if (err) {
-            console.log(err);
-        } else {
-            res.send("user is inserted")
-        }
-    });
-})
-
-// router.route('/').get(function(req, res) {
-//     // do what for get request in /api/
-//     //res.json({ message: 'API Initialized!'});
-//  }).post(async function(req, res) {
-//     // do what for post request in /api/
-//     if (!req.body) {
-//         return res.sendStatus(400);
-//     }
-//     res.setHeader('Content-Type', 'application/json');
-//     console.log(req.body);
-//     let responseObj = {};
-//     if (req.body && req.body.queryResult && req.body.queryResult.intent && req.body.queryResult.intent.displayName) {
-//         console.log(req.body.queryResult.intent.displayName);
-//         switch (req.body.queryResult.intent.displayName) {
-//             case "createClassroom":
-//                 responseObj =  await createClassIntent.createClass();
-//                 break;
-//             case "listClassroom":
-//                 responseObj =  await listClassIntent.listClass();
-//                 break;
-//             case "listCommand":
-//                 responseObj =  await listCommandIntent.listCommand();
-//                 break;
-//             default:
-//                 break;
-//         }
-//     }
-//     console.log("response Obj : ",responseObj);
-//     res.json(responseObj);
-//  });
 
 // First post from LINE
 app.post('/webhook', async (req, res) => {

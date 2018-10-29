@@ -26,7 +26,7 @@ const theme = createMuiTheme({
         }
       }
     },
-    MuiNotchedOutline: {
+    MuiPrivateNotchedOutline: {
       root: {
         borderColor: "#11336C"
       },
@@ -48,7 +48,7 @@ const themeDesc = createMuiTheme({
         }
       }
     },
-    MuiNotchedOutline: {
+    MuiPrivateNotchedOutline: {
       focused: {
         borderColor: "#11336C"
       },
@@ -300,7 +300,7 @@ class CreateClassroom extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-          <h3><p style={{color:"#11336C"}}> Create new classroom </p></h3>
+          <h3><p> Create new classroom </p></h3>
           <MaterialUIForm onSubmit={this.submitForm} style={{display: 'flex', flexWrap: 'wrap'}}>
             <Grid item xs={12}>
               <MuiThemeProvider theme={theme}>
