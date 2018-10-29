@@ -12,7 +12,7 @@ async function mainServerHandle(body){
     let reply_token = body.replyToken;
     let incomingMsg = body.message.text;
     let userId = body.source.userId;
-    if (checkRegistedUser(userId)) {
+    if (checkRegistedUser(body)) {
         await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
             switch (result.intent.displayName) {
                 case 'createClassroom':
