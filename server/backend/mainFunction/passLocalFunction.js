@@ -1,3 +1,9 @@
+const request = require('request') 
+const HEADERS = {
+	'Content-Type': 'application/json',
+	'Authorization': 'Bearer svGsqRZqRcnxR0tOJZXWqZxiioJXQGv7btlA4iyuAT5KWbqTg+9y6N5i1J6ir/x2u+9xMXGUhG31BPel4QW48aSkwiclb45M/rTSnejiAGmiQN0j+ZwcJYBH/IKvBLM/maV/yWBuh1eThXdOwVt4iFGUYhWQfeY8sLGRXgo3xvw='
+}
+
 var makLocalhost = ""
 var nutLocalhost = ""
 var poomLocalhost = ""
