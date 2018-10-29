@@ -32,6 +32,4 @@ curl -X POST https://api.line.me/liff/v1/apps \
 
 
 ******* deployment :
-at /lineEdu/server/web  : sudo npm npm run build
-                        : cd ./build
-                        : sudo mv -t /var/www/html [every files in build folder]
+at /lineEdu/server/web  : sudo npm run build

@@ -24,7 +24,7 @@ async function mainServerHandle(body){
                             {
                             "type": "uri",
                             "label": "OK",
-                            "uri": "line://app/1609431105-rmEDzO4P"
+                            "uri": "line://app/1609431105-7LGnWqlK"
                             }
                         ],
                         "text": "You can fill the form in this link to create a new classroom."
@@ -43,7 +43,7 @@ async function mainServerHandle(body){
             }
         });
     } else {
-        messageFunction.replyText(reply_token,"Please, fill some information before start use our service in this link: line://app/1609431105-wDVgOl4L")
+        messageFunction.replyText(reply_token,"Please, fill some information before start use our service in this link: line://app/1609431105-p3Dw1zkg")
     }
 }
 
@@ -62,7 +62,7 @@ function addNewUser(message) {
     let { reply_token } = message.reply_token
     user.findOne({ userID: userID }, (err, data) => {
         if (data == null) {
-            messageFunction.replyText(reply_token,"welcome to LINE Education. Please, fill some information before start use our service in this link: line://app/1609431105-wDVgOl4L")
+            messageFunction.replyText(reply_token,"welcome to LINE Education. Please, fill some information before start use our service in this link: line://app/1609431105-p3Dw1zkg")
         } else {
             messageFunction.replyText(reply_token,"welcome back to LINE Education.")
 
