@@ -1,5 +1,6 @@
 const dialogflowFunction = require('../dialogflow/index.js');
 const messageFunction = require('./messageFunction.js');
+const liffList = require('../constant/liffList');
 const request = require('request') 
 const HEADERS = {
 	'Content-Type': 'application/json',
@@ -24,7 +25,7 @@ async function mainServerHandle(body){
                             {
                             "type": "uri",
                             "label": "OK",
-                            "uri": "line://app/1609431105-7LGnWqlK"
+                            "uri": liffList.createClassroom
                             }
                         ],
                         "text": "You can fill the form in this link to create a new classroom."
@@ -43,7 +44,7 @@ async function mainServerHandle(body){
             }
         });
     } else {
-        messageFunction.replyText(reply_token,"Please, fill some information before start use our service in this link: line://app/1609431105-JGQZjr5W")
+        messageFunction.replyText(reply_token,`Please, fill some information before start use our service in this link: ${liffList.addUser}`)
     }
 }
 
@@ -62,7 +63,7 @@ function addNewUser(message) {
     let { reply_token } = message.reply_token
     user.findOne({ userID: userID }, (err, data) => {
         if (data == null) {
-            messageFunction.replyText(reply_token,"welcome to LINE Education. Please, fill some information before start use our service in this link: line://app/1609431105-p3Dw1zkg")
+            messageFunction.replyText(reply_token,`welcome to LINE Education. Please, fill some information before start use our service in this link: ${liffList.addUser}`)
         } else {
             messageFunction.replyText(reply_token,"welcome back to LINE Education.")
 

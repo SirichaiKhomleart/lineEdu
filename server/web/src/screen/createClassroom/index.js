@@ -87,6 +87,21 @@ const themeButton = createMuiTheme({
   }
 });
 
+const themeButtonCancel = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        color: '#11336C',
+        fontSize: "18px",
+        fontWeight: "500",
+        backgroundColor: "white",
+        height: "50px",
+        border: "solid 2px"
+      }
+    }
+  }
+});
+
 class CreateClassroom extends Component {
 
   constructor(props) {
@@ -123,12 +138,7 @@ class CreateClassroom extends Component {
 
   closeApp(event) {
     event.preventDefault()
-    liff.sendMessages([{
-      type: 'text',
-      text: 'Thank you, Bye!'
-    }]).then(() => {
-      liff.closeWindow()
-    })
+    liff.closeWindow()
   }
 
   handleClassNameChange = (event) => {
@@ -390,6 +400,11 @@ class CreateClassroom extends Component {
               <MuiThemeProvider theme={themeButton}>
                 <Button type="submit">
                   Submit
+                </Button>
+              </MuiThemeProvider>
+              <MuiThemeProvider theme={themeButtonCancel}>
+                <Button style={{marginTop: "10px"}} onClick={this.closeApp}>
+                  Cancel
                 </Button>
               </MuiThemeProvider>
             </Grid>

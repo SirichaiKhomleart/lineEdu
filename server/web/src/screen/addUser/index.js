@@ -31,18 +31,33 @@ const theme = createMuiTheme({
   }
 });
 const themeButton = createMuiTheme({
-    overrides: {
-      MuiButton: {
-        root: {
-          color: 'white',
-          fontSize: "18px",
-          fontWeight: "300",
-          backgroundColor: "#27973D",
-          height: "50px"
-        }
+  overrides: {
+    MuiButton: {
+      root: {
+        color: 'white',
+        fontSize: "18px",
+        fontWeight: "300",
+        backgroundColor: "#27973D",
+        height: "50px"
       }
     }
-  });
+  }
+});
+
+const themeButtonCancel = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        color: '#27973D',
+        fontSize: "18px",
+        fontWeight: "500",
+        backgroundColor: "white",
+        height: "50px",
+        border: "solid 2px"
+      }
+    }
+  }
+});
 
 class AddUser extends Component {
 
@@ -75,7 +90,7 @@ class AddUser extends Component {
     })
   }
 
-  closeApp() {
+  submitApp() {
     liff.sendMessages([{
       type: 'text',
       text: 'Thank you, you are ready to use our services.'
@@ -84,7 +99,16 @@ class AddUser extends Component {
     })
   }
 
-  handleClassFullnameChange = (event) => {
+  closeApp() {
+    liff.sendMessages([{
+      type: 'text',
+      text: "You haven't finish to fill register form yet. Please, come back when you're ready."
+    }]).then(() => {
+      liff.closeWindow()
+    })
+  }
+
+  handleFullnameChange = (event) => {
     this.setState({
       fullName: event.target.value,
     });
@@ -171,6 +195,11 @@ class AddUser extends Component {
               <MuiThemeProvider theme={themeButton}>
                 <Button type="submit">
                   Done
+                </Button>
+              </MuiThemeProvider>
+              <MuiThemeProvider theme={themeButtonCancel}>
+                <Button style={{marginTop: "10px"}} onClick={this.closeApp}>
+                  Cancel
                 </Button>
               </MuiThemeProvider>
             </Grid>
