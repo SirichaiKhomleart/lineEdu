@@ -12,16 +12,16 @@ module.exports = (router) => {
     
     router
         .get('/testDB', function(req, res) {
-            // let testClassroom = new classroom({ className: 'testing' });
+            let testClassroom = new classroom({ className: 'testing' });
         
-            // testClassroom.save((err) => {
-            //     if (err) {
-            //         console.log(err);
-            //     } else {
-            //         res.send("testing insert is completed")
-            //     }
-            // })
-            mainServerFunction.addNewUser();
+            testClassroom.save((err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    res.send("testing insert is completed")
+                }
+            })
+            // mainServerFunction.addNewUser();
         });
     
     router

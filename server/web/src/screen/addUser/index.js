@@ -139,7 +139,7 @@ class AddUser extends Component {
     insertClassroom(insertData, (result) => {
       console.log(result);
     })
-    this.closeApp();
+    this.submitApp();
   }
 
   render() {
