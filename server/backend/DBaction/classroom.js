@@ -13,6 +13,17 @@ module.exports = {
             next(classroom)
         })
     },
+    getAllClassroom: (res) => {
+        classroom.find({}, (err, classroom) => {
+            if (err)
+                res.send(err)
+            else if (!classroom)
+                res.send(404)
+            else{
+                res.send(classroom)
+            }
+        })
+    },
     addClassroom: (req, res, next) => {
         (new classroom(req.body)).save((err, newClassroom) => {
             if (err)

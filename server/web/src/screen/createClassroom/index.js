@@ -34,7 +34,10 @@ const theme = createMuiTheme({
         borderColor: "#11336C"
       }
     }
-  }
+  },
+  typography: {
+    useNextVariants: true,
+  },
 });
 const themeDesc = createMuiTheme({
   overrides: {
@@ -57,6 +60,9 @@ const themeDesc = createMuiTheme({
         borderColor: "#11336C"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 const themeSubTextField = createMuiTheme({
@@ -71,6 +77,9 @@ const themeSubTextField = createMuiTheme({
         }
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 const themeButton = createMuiTheme({
@@ -84,6 +93,9 @@ const themeButton = createMuiTheme({
         height: "50px"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 
@@ -99,6 +111,9 @@ const themeButtonCancel = createMuiTheme({
         border: "solid 2px"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 

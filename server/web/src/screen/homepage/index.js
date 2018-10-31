@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import logo from '../../asset/lineLOGO.jpg'
+import { getAllClassroom } from '../../mongoDBFunction'
 
 const liff = window.liff
 
@@ -11,14 +12,20 @@ export class HomePage extends Component {
       displayName : '',
       userId : '',
       pictureUrl : '',
-      statusMessage : ''
+      statusMessage : '',
+      class: {}
     }
     this.initialize = this.initialize.bind(this)
     this.closeApp = this.closeApp.bind(this)
   }
 
-  componentDidMount() {
+  async componentDidMount () {
     window.addEventListener('load', this.initialize);
+    let data = await getAllClassroom()
+    this.setState({
+      class: data
+    })
+    console.log(this.state.class)
   }
 
   initialize() {

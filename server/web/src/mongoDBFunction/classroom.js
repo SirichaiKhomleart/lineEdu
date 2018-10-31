@@ -11,3 +11,13 @@ export async function insertClassroom(data, callback) {
         callback(response.data)
     });
 }
+
+export async function getAllClassroom() {
+    let response = await axios.post('/api/getAllClassroom',
+        {
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    return response.data
+}

@@ -4,12 +4,10 @@ var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
     userID: {
-        type: String,
-        required: true
+        type: String
     },
     userDisplayName: {
-        type: String,
-        required: true
+        type: String
     },
     userPicURL: {
         type: String

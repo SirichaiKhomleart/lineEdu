@@ -28,6 +28,9 @@ const theme = createMuiTheme({
         borderColor: "#27973D"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 const themeButton = createMuiTheme({
@@ -41,6 +44,9 @@ const themeButton = createMuiTheme({
         height: "50px"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 
@@ -56,6 +62,9 @@ const themeButtonCancel = createMuiTheme({
         border: "solid 2px"
       }
     }
+  },
+  typography: {
+    useNextVariants: true,
   }
 });
 

@@ -1,16 +1,8 @@
 import React, { Component } from 'react'
-import { insertClassroom } from '../../mongoDBFunction'
 import { Body, FlexCenter } from '../../style'
-import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import InputAdornment from '@material-ui/core/InputAdornment';
-import Icon from '@material-ui/core/Icon';
-import Chip from '@material-ui/core/Chip';
-import Paper from '@material-ui/core/Paper';
-import FormControl from '@material-ui/core/FormControl';
-import MaterialUIForm from 'material-ui-form'
 import Success from '../../asset/success.jpg'
 
 const liff = window.liff
@@ -37,7 +29,10 @@ const theme = createMuiTheme({
         color: "black"
       }
     }
-  }
+  },
+  typography: {
+    useNextVariants: true,
+  },
 });
 
 class SuccessCreateClass extends Component {

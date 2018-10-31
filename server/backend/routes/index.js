@@ -48,6 +48,12 @@ module.exports = (router) => {
                 }
             });
         })
+
+    router
+        .post('/getAllClassroom', async (req, res) => {
+            console.log("getAllClassroom coming request");
+            classroomAction.getAllClassroom(res);
+        })
     
     // router.route('/')
         // .get(function(req, res) {
