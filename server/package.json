@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start-vm": "concurrently \"cd backend && node server.js\" \"cd web && npm start\"",
-    "start-mak": "concurrently \"cd backend && nodemon server.js\" \"cd web && npm start\"",
+    "start-mak": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelMak.js\" \"cd web && npm start\"",
     "start-nut": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelNut.js\" \"cd web && npm start\"",
     "start-poom": "concurrently \"cd backend && nodemon server.js\" \"nodemon localtunnelPoom.js\" \"cd web && npm start\""
   },

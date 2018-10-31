@@ -13,7 +13,7 @@ async function mainServerHandle(body){
     let reply_token = body.replyToken;
     let incomingMsg = body.message.text;
     let userId = body.source.userId;
-    if (checkRegistedUser(userId)) {
+    if (await checkRegistedUser(userId)) {
         await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
             switch (result.intent.displayName) {
                 case 'createClassroom':
@@ -48,14 +48,13 @@ async function mainServerHandle(body){
     }
 }
 
-function checkRegistedUser(userId) {
-    user.findOne({ userID: userId }, (err, data) => {
-        if (data == null) {
-            return true
-        } else {
-            return false
-        }
-    })
+async function checkRegistedUser(userId) {
+    let userData = await user.findOne({ userID: userId });
+    if (userData !== null) {
+        return true
+    } else {
+        return false
+    }
 }
 
 function addNewUser(message) {
