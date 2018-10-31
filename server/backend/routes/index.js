@@ -2,6 +2,7 @@ const classroomAction = require('../DBaction/classroom')
 const userAction = require('../DBaction/user')
 const mainServerFunction = require('../mainFunction/index.js');
 const user = require('../model/user')
+const classroom = require('../model/classrom')
 
 module.exports = (router) => {
 

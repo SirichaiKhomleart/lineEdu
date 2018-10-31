@@ -22,7 +22,7 @@ const apiPort = process.env.API_PORT || 3001;
 // const agent = new WebhookClient({request: request, response: response});
 
 // //db config
-mongoose.connect('mongodb://localhost:27017/lineEdu', { useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/lineEdu', { useNewUrlParser: true });
 let db = mongoose.connection;
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
