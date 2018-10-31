@@ -60,7 +60,7 @@ app.post('/getConnect', async (req, res) => {
 })
 
 // First post from LINE
-app.post('/webhook', async (req, res) => {
+router.post('/webhook', async (req, res) => {
     res.send("200")
     console.log("incoming message");
     if (req.body.events && req.body.events[0].type == "follow") {
