@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { insertClassroom } from '../../mongoDBFunction'
+import { addNewUser } from '../../mongoDBFunction'
 import { Body } from '../../style'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
@@ -90,22 +90,8 @@ class AddUser extends Component {
     })
   }
 
-  submitApp() {
-    liff.sendMessages([{
-      type: 'text',
-      text: 'Thank you, you are ready to use our services.'
-    }]).then(() => {
-      liff.closeWindow()
-    })
-  }
-
   closeApp() {
-    liff.sendMessages([{
-      type: 'text',
-      text: "You haven't finish to fill register form yet. Please, come back when you're ready."
-    }]).then(() => {
-      liff.closeWindow()
-    })
+    liff.closeWindow()
   }
 
   handleFullnameChange = (event) => {
@@ -136,10 +122,10 @@ class AddUser extends Component {
         userEmail: email,
         userPhoneNum: phoneNum
     }
-    insertClassroom(insertData, (result) => {
+    addNewUser(insertData, (result) => {
       console.log(result);
     })
-    this.submitApp();
+    this.closeApp();
   }
 
   render() {

@@ -2,7 +2,7 @@ const classroomAction = require('../DBaction/classroom')
 const userAction = require('../DBaction/user')
 const mainServerFunction = require('../mainFunction/index.js');
 const user = require('../model/user')
-const classroom = require('../model/classrom')
+const classroom = require('../model/classroom')
 
 module.exports = (router) => {
 
@@ -34,8 +34,6 @@ module.exports = (router) => {
                     { $push: { userCoClassList: newClass._id } }
                 )
             })
-            
-
         })
     
     router
