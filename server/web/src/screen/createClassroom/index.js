@@ -239,7 +239,7 @@ class CreateClassroom extends Component {
       classScore: scoreSection,
       classMoreDetailList: moreInfo,
       classStatus: "active",
-      classOwner: userId,
+      classOwner: "Ubab717ae1162a07a32154640a5f4f1e8",
       classPublicKey: shortid.generate(),
       classPrivateKey: [shortid.generate()]
     }

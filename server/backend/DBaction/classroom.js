@@ -32,9 +32,9 @@ module.exports = {
                 res.send(400)
             else{
                 res.send(newClassroom)
+                next(newClassroom)
             }
         })
-        return newClassroom
     },
     updateClassroom: (req, res, next) => {
         classroom.update(req.body, (err, updateClassroom) => {
