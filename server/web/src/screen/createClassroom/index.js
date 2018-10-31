@@ -231,7 +231,7 @@ class CreateClassroom extends Component {
     });
   };
 
-  submitForm = (values, pristineValues) => {
+  submitForm =  async (values, pristineValues) => {
     let { className,classDesc,moreInfo,scoreSection,userId } = this.state
     let insertData = {
       className: className,
@@ -244,9 +244,8 @@ class CreateClassroom extends Component {
       classPrivateKey: [shortid.generate()]
     }
     console.log("before send ",insertData);
-    insertClassroom(insertData, (result) => {
-      console.log(result);
-    })
+    let data = await insertClassroom(insertData);
+    console.log(data);
     this.props.history.push({
       pathname: '/successCreateClass',
       state: {

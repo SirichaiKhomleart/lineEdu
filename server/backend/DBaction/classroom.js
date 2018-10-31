@@ -24,8 +24,8 @@ module.exports = {
             }
         })
     },
-    addClassroom: (req, res, next) => {
-        (new classroom(req.body)).save((err, newClassroom) => {
+    addClassroom: (data, res, next) => {
+        (new classroom(data)).save((err, newClassroom) => {
             if (err)
                 res.send(err)
             else if (!newClassroom)
@@ -33,8 +33,8 @@ module.exports = {
             else{
                 res.send(newClassroom)
             }
-            next(newClassroom)
         })
+        return newClassroom
     },
     updateClassroom: (req, res, next) => {
         classroom.update(req.body, (err, updateClassroom) => {

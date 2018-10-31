@@ -28,12 +28,12 @@ module.exports = (router) => {
     router
         .post('/insertClassroom', async (req, res) => {
             console.log("insertClassroom coming request");
-            classroomAction.addClassroom(req.body,res,(newClass) => {
-                user.update(
-                    { userID: req.body.userID },
-                    { $push: { userCoClassList: newClass._id } }
-                )
-            })
+            console.log(req.body);
+            let newClass = await classroomAction.addClassroom(req.body,res)
+            user.update(
+                { userID: req.body.userID },
+                { $push: { userCoClassList: newClass._id } }
+            )
         })
     
     router

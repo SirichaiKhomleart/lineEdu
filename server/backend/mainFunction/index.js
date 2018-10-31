@@ -17,10 +17,11 @@ async function mainServerHandle(body){
         await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
             switch (result.intent.displayName) {
                 case 'createClassroom':
-                let replyMessage = {
-                    "type": "template",
-                    "template": {
-                        "type": "confirm",
+                    let replyMessage = {
+                        "type": "template",
+                        "altText": "this is a buttons template",
+                        "template": {
+                        "type": "buttons",
                         "actions": [
                             {
                             "type": "uri",

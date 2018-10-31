@@ -50,9 +50,10 @@ function replyTemplate(reply_token, msg) {
 			msg
 		]
 	})
+	console.log("body",body);
 	curl('reply', body);
 }
 
 module.exports = {
-    curl,push,replyText
+    curl,push,replyText,replyTemplate
 };
