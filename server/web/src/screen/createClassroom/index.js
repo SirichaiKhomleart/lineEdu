@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import FormControl from '@material-ui/core/FormControl';
 import MaterialUIForm from 'material-ui-form'
 var shortid = require('shortid');
+shortid.characters('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ$@');
 
 const liff = window.liff
 const theme = createMuiTheme({
@@ -239,7 +240,7 @@ class CreateClassroom extends Component {
       classScore: scoreSection,
       classMoreDetailList: moreInfo,
       classStatus: "active",
-      classOwner: "Ubab717ae1162a07a32154640a5f4f1e8",
+      classOwner: userId,
       classPublicKey: shortid.generate(),
       classPrivateKey: [shortid.generate()]
     }

@@ -4,12 +4,11 @@ module.exports = {
     getUser: (req, res, next) => {
         user.findById(req.body, (err, user) => {
             if (err)
-                res.send(err)
+                console.log(err)
             else if (!user)
-                res.send(404)
+                console.log(404)
             else
-                res.send(user)
-            next()
+                console.log(user)
         })
     },
     addUser: (req, res, next) => {
@@ -33,5 +32,18 @@ module.exports = {
                 res.send(req.body)
             next()
         })
+    },
+    findByUserID: async (userId) => {
+        let result = await user.find({userID: userId}, (err) => {
+            if (err)
+                console.log(err)
+        })
+        return result
+    },
+    joinClassAsCo: (classCode, classID, from) => {
+        let result = user.updateOne({userID: from}, {$push: { userCoClassList: classID }})
+    },
+    joinClassAsStudent: (classCode, classID, from) => {
+        let result = user.updateOne({userID: from}, {$push: { userJoinedClassList: classID }})
     }
 }

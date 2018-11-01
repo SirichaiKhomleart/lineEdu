@@ -31,6 +31,12 @@ var classroomSchema = new Schema({
     },
     classMoreDetailList: {
         type: Array
+    },
+    classCoList: {
+        type: Array
+    },
+    classStudentList: {
+        type: Array
     }
 });
 

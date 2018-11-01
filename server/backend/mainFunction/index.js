@@ -1,11 +1,13 @@
 const dialogflowFunction = require('../dialogflow/index.js');
 const messageFunction = require('./messageFunction.js');
+const postbackFunction = require('./postbackFunction.js');
+
 const liffList = require('../constant/liffList');
-const request = require('request') 
-const HEADERS = {
-	'Content-Type': 'application/json',
-	'Authorization': 'Bearer svGsqRZqRcnxR0tOJZXWqZxiioJXQGv7btlA4iyuAT5KWbqTg+9y6N5i1J6ir/x2u+9xMXGUhG31BPel4QW48aSkwiclb45M/rTSnejiAGmiQN0j+ZwcJYBH/IKvBLM/maV/yWBuh1eThXdOwVt4iFGUYhWQfeY8sLGRXgo3xvw='
-}
+const createClassIntent = require('../intentFunction/createClassIntent.js');
+const listClassIntent = require('../intentFunction/listClassIntent.js');
+const listCommandIntent = require('../intentFunction/listCommandIntent.js');
+const askClassCode_1_2 = require('../intentFunction/askClassCode_1_2_Intent.js');
+
 var user = require('../model/user.js');
 
 async function mainServerHandle(body){
@@ -35,15 +37,46 @@ async function mainServerHandle(body){
                     messageFunction.replyTemplate(reply_token,replyMessage)
                     break;
                 case 'joinClassroom':
-                    console.log("intent join class");
+                    messageFunction.passResponseFromDialogFlow(reply_token,result.fulfillmentText)
+                    break;
+                case 'askClassCode':
+                    askClassCode_1_2.findClass(reply_token,result.parameters,result.intent.displayName)
+                    break;
+                case 'askClassCode - fallback':
+                    messageFunction.passResponseFromDialogFlow(reply_token,result.fulfillmentText)
+                    break;
+                case 'askClassCode2':
+                    askClassCode_1_2.findClass(reply_token,result.parameters,result.intent.displayName)
+                    break;
+                case 'askClassCode2 - fallback':
+                    messageFunction.passResponseFromDialogFlow(reply_token,result.fulfillmentText)
                     break;
                 case 'createAnnouncement':
                     console.log("intent create ann");
                     break;
                 default:
-                messageFunction.replyText(reply_token,"not in any intent.")
+                    messageFunction.replyText(reply_token,"not in any intent.")
             }
         });
+    } else {
+        messageFunction.replyText(reply_token,`Please, fill some information before start use our service in this link: ${liffList.addUser}`)
+    }
+}
+
+mainServerHandlePostBack = async (body) => {
+    console.log("postback coming")
+    let reply_token = body.replyToken;
+    let incomingData = body.postback.data;
+    let userId = body.source.userId;
+    if (await checkRegistedUser(userId)) {
+        let list = incomingData.split(":");
+        switch (list[0]) {
+            case "joinClass":
+                postbackFunction.joinClass(list[1],list[2],list[3],userId)
+                break;
+            default:
+                
+        }
     } else {
         messageFunction.replyText(reply_token,`Please, fill some information before start use our service in this link: ${liffList.addUser}`)
     }
@@ -78,6 +111,7 @@ function joinGroup(message) {
 function leaveGroup(message) {
     
 }
+
 
 module.exports = {
     mainServerHandle,addNewUser,joinGroup,leaveGroup

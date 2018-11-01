@@ -1,8 +1,10 @@
 const classroomAction = require('../DBaction/classroom')
 const userAction = require('../DBaction/user')
+const classCodeAction = require('../DBaction/classCode')
 const mainServerFunction = require('../mainFunction/index.js');
 const user = require('../model/user')
 const classroom = require('../model/classroom')
+const dialogflowFunction = require('../dialogflow/index.js');
 
 module.exports = (router) => {
 
@@ -33,6 +35,31 @@ module.exports = (router) => {
                     { userID: req.body.classOwner },
                     { $push: { userCoClassList: newClass._id } }
                 )
+                await classCodeAction.insertClassCodeBoth({
+                    publicKey: newClass.classPublicKey,
+                    privateKey: newClass.classPrivateKey[0]
+                }).then(async () => {
+                    let data = await classCodeAction.getClassCode()
+                    let entriesPublic = await data[0].publicKeyList.map((subData) => {
+                        let result = {
+                            synonyms: [subData],
+                            value: subData
+                        }
+                        return result
+                    })
+                    let entriesPrivate = await data[0].privateKeyList.map((subData) => {
+                        let result = {
+                            synonyms: [subData],
+                            value: subData
+                        }
+                        return result
+                    })
+                    let sendData = {
+                        entries: [...entriesPrivate,...entriesPublic],
+                        name: "classCode"
+                    }
+                    dialogflowFunction.updateEntity("classCode",sendData)
+                })
             })
         })
     

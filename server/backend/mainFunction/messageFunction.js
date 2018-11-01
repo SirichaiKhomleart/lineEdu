@@ -54,6 +54,10 @@ function replyTemplate(reply_token, msg) {
 	curl('reply', body);
 }
 
+function passResponseFromDialogFlow(reply_token,msg){
+    replyText(reply_token,msg)
+}
+
 module.exports = {
-    curl,push,replyText,replyTemplate
+    curl,push,replyText,replyTemplate,passResponseFromDialogFlow
 };

@@ -1,6 +1,4 @@
-const createClassIntent = require('./createClassIntent.js');
-const listClassIntent = require('./listClassIntent.js');
-const listCommandIntent = require('./listCommandIntent.js');
+const request = require('request')
 
 const projectId = 'lineeducation-949ee'; //https://dialogflow.com/docs/agents#settings
 const sessionId = 'dialogflow-lodqfr@lineeducation-949ee.iam.gserviceaccount.com';
@@ -10,6 +8,11 @@ const sessionClient = new dialogflow.SessionsClient({
     keyFilename: './lineeducation-949ee-4323881c6fda.json'
 });
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
+const header = {
+    "Authorization": "Bearer 11f7d61e86cb464ab5b8a7db15c68dc5",
+    'Content-Type' : 'application/json'
+}
+const entityList = require('../constant/entity');
 
 async function passToDialogFlow(msg,callback) {
     const request = {
@@ -38,6 +41,23 @@ async function passToDialogFlow(msg,callback) {
     });
 }
 
+async function updateEntity(entityName,data,callback) {
+    console.log("url",`https://api.dialogflow.com/v1/entities/${entityList[entityName]}`);
+    console.log("name",entityName);
+    console.log("data",data);
+
+    const requestDetail = {
+        url: `https://api.dialogflow.com/v1/entities/${entityList[entityName]}`,
+        headers: header,
+        body: [data],
+        json: true
+    };
+    await request.put(requestDetail, (err, res, body) => {
+        console.log('err :' + err)
+        console.log('res :'+ res)
+    })
+}
+
 module.exports = {
-    passToDialogFlow
+    passToDialogFlow,updateEntity
 }

@@ -69,8 +69,14 @@ router.post('/webhook', async (req, res) => {
         mainServerFunction.joinGroup(req.body.events[0])
     } else if (req.body.events && req.body.events[0].type == "leave") {
         mainServerFunction.leaveGroup(req.body.events[0])
+    } else if (req.body.events && req.body.events[0].type == "postback"){
+        if (!(req && req.body && req.body.passing)) {
+            passLocalFunction.passToMak(req.body)            
+        } else {
+            mainServerFunction.mainServerHandlePostBack(req.body.events[0])
+        }
     }
-    if (!(req && req.body && req.body.passing)) {
+    if (!(req && req.body && req.body.passing) && req.body.events[0].type == "message") {
         if (req.body.events[0].message.text.startsWith("Mak:")) {
             console.log("in Mak with message: " + req.body.events[0].message.text.substring(4))
             req.body.events[0].message.text = req.body.events[0].message.text.substring(4)

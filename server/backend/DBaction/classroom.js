@@ -46,5 +46,34 @@ module.exports = {
                 res.send(req.body)
             next(updateClassroom)
         })
+    },
+    findByCode: async (classCode) => {
+        let byPublic = await classroom.findOne({'classPublicKey': classCode})
+        let byPrivate = await classroom.findOne({'classPrivateKey': classCode})
+        if (!byPublic && byPrivate) {
+            return {
+                classroom: byPrivate,
+                by: "Private"
+            }
+        } else if (byPublic && !byPrivate) {
+            return {
+                classroom: byPublic,
+                by: "Public"
+            }
+        } else {
+            return null
+        }
+
+    },
+    addCo: (classCode, classID, from) => {
+        let result = classroom.updateOne({ _id: classID },{ $push: { classCoList: from }})
+        classroom.updateOne({ _id: classID },{ $pull: { classPrivateKey: classCode }})
+    },
+    addStudent: (classCode, classID, from) => {
+        let result = classroom.updateOne({ _id: classID },{ $push: { classStudentList: {
+            userID: from,
+            joinTimeStamp: new Date(),
+            moreDetail: {}
+    } }})
     }
 }
