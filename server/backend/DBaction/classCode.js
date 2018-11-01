@@ -20,21 +20,21 @@ module.exports = {
     insertClassCodeBoth: async (data,res,next) => {
         let updatedClassCode = await classCode.updateOne(
             {},
-            { $push: { privateKeyList: data.privateKey, publicKeyList: data.publicKey } }
+            { $addToSet: { privateKeyList: data.privateKey, publicKeyList: data.publicKey } }
         )
         return updatedClassCode
     },
     insertClassCodePrivate: async (data,res,next) => {
         let updatedClassCode = await classCode.updateOne(
             {},
-            { $push: { privateKeyList: data } }
+            { $addToSet: { privateKeyList: data } }
         )
         return updatedClassCode
     },
     deleteClassCodePrivate: async (data,res,next) => {
         let updatedClassCode = await classCode.updateOne(
             {},
-            { $pull: { privateKeyList: data } }
+            { $addToSet: { privateKeyList: data } }
         )
         return updatedClassCode
     }

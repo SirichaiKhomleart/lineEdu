@@ -1,15 +1,20 @@
 const user = require('../DBaction/user')
 const classroom = require('../DBaction/classroom')
-const classCode = require('../DBaction/classCode')
+const classCodes = require('../DBaction/classCode')
 
-function joinClass(by, classCode, classID, from) {
-    if (by == "Public") {
-        user.joinClassAsCo(classCode, classID, from)
-        classroom.addCo(classCode, classID, from)
-        classCode.deleteClassCodePrivate(classCode)
+async function joinClass(by, classCode, classID, from) {
+    console.log(by);
+    console.log(classCode);
+    console.log(classID);
+    console.log(from);
+
+    if (by == "Private") {
+        await user.joinClassAsCo(classCode, classID, from)
+        await classroom.addCo(classCode, classID, from)
+        await classCodes.deleteClassCodePrivate(classCode)
     } else {
-        user.joinClassAsStudent(classCode, classID, from)
-        classroom.addStudent(classCode, classID, from)
+        await user.joinClassAsStudent(classCode, classID, from)
+        await classroom.addStudent(classCode, classID, from)
     }
 }
 

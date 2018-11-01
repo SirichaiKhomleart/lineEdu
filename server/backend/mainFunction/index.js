@@ -114,5 +114,5 @@ function leaveGroup(message) {
 
 
 module.exports = {
-    mainServerHandle,addNewUser,joinGroup,leaveGroup
+    mainServerHandle,addNewUser,joinGroup,leaveGroup,mainServerHandlePostBack
 };

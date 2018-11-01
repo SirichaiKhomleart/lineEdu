@@ -19,7 +19,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
         "size": "xs",
         "wrap": true
       }]
-    let desc = ""
+    let desc = "-"
     let scoreList = classroom.classScore.map((data,key) => {
         let result = {
             "type": "box",

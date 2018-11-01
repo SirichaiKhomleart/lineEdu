@@ -66,14 +66,13 @@ module.exports = {
 
     },
     addCo: (classCode, classID, from) => {
-        let result = classroom.updateOne({ _id: classID },{ $push: { classCoList: from }})
+        let result = classroom.updateOne({ _id: classID },{ $addToSet: { classCoList: from }})
         classroom.updateOne({ _id: classID },{ $pull: { classPrivateKey: classCode }})
     },
-    addStudent: (classCode, classID, from) => {
-        let result = classroom.updateOne({ _id: classID },{ $push: { classStudentList: {
-            userID: from,
-            joinTimeStamp: new Date(),
-            moreDetail: {}
-    } }})
+    addStudent: async (classCode, classID, from) => {
+        let result = await classroom.updateOne({ classPublicKey: classCode, 'classStudentList.userID': {$ne: from} },
+            { $push: { classStudentList: { userID: from }
+        }})
+        console.log(result);
     }
 }

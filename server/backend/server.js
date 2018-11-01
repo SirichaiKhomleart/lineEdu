@@ -92,7 +92,7 @@ router.post('/webhook', async (req, res) => {
         } else {
             mainServerFunction.mainServerHandle(req.body.events[0])
         }
-    } else {
+    } else if (req.body.events[0].type == "message") {
         mainServerFunction.mainServerHandle(req.body.events[0])
     }
 })

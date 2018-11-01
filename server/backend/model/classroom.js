@@ -3,6 +3,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+var studentJoinedSchema = new Schema({
+    userID: String,
+    JoinedTimpStamp: {
+        type: Date,
+        default: Date.now
+    }
+})
 var classroomSchema = new Schema({
     className: {
         type: String
@@ -35,9 +42,7 @@ var classroomSchema = new Schema({
     classCoList: {
         type: Array
     },
-    classStudentList: {
-        type: Array
-    }
+    classStudentList: [studentJoinedSchema]
 });
 
 module.exports = mongoose.model('classroom', classroomSchema, 'classrooms');

@@ -40,10 +40,18 @@ module.exports = {
         })
         return result
     },
-    joinClassAsCo: (classCode, classID, from) => {
-        let result = user.updateOne({userID: from}, {$push: { userCoClassList: classID }})
+    joinClassAsCo: async (classCode, classID, from) => {
+        let result = await user.updateOne({userID: from}, { $addToSet: { userCoClassList: classID }})
+        console.log(result);
     },
-    joinClassAsStudent: (classCode, classID, from) => {
-        let result = user.updateOne({userID: from}, {$push: { userJoinedClassList: classID }})
+    joinClassAsStudent: async (classCode, classID, from) => {
+        let result = await user.updateOne({userID: from}, { $addToSet: { userJoinedClassList: classID }}, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        })
+        // let result = await user.find({userID: from})
+        console.log(result);
+
     }
 }
