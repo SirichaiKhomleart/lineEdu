@@ -72,9 +72,8 @@ router.post('/webhook', async (req, res) => {
     } else if (req.body.events && req.body.events[0].type == "postback"){
         if (!(req && req.body && req.body.passing)) {
             passLocalFunction.passToMak(req.body)            
-        } else {
-            mainServerFunction.mainServerHandlePostBack(req.body.events[0])
-        }
+        } 
+        mainServerFunction.mainServerHandlePostBack(req.body.events[0])
     }
     if (!(req && req.body && req.body.passing) && req.body.events[0].type == "message") {
         if (req.body.events[0].message.text.startsWith("Mak:")) {
