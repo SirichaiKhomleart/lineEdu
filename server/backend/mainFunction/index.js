@@ -15,11 +15,12 @@ async function mainServerHandle(body){
     let reply_token = body.replyToken;
     let incomingMsg = body.message.text;
     let userId = body.source.userId;
+    let replyMessage = {}
     if (await checkRegistedUser(userId)) {
         await dialogflowFunction.passToDialogFlow(incomingMsg, function(result) {
             switch (result.intent.displayName) {
                 case 'createClassroom':
-                    let replyMessage = {
+                    replyMessage = {
                         "type": "template",
                         "altText": "this is a buttons template",
                         "template": {
@@ -51,8 +52,23 @@ async function mainServerHandle(body){
                 case 'askClassCode2 - fallback':
                     messageFunction.passResponseFromDialogFlow(reply_token,result.fulfillmentText)
                     break;
-                case 'createAnnouncement':
-                    console.log("intent create ann");
+                case 'makeAnnounce':
+                    replyMessage = {
+                        "type": "template",
+                        "altText": "this is a buttons template",
+                        "template": {
+                        "type": "buttons",
+                        "actions": [
+                            {
+                            "type": "uri",
+                            "label": "OK",
+                            "uri": liffList.makeAnnounce
+                            }
+                        ],
+                        "text": "You can fill the form in this link to announce your message to every student in selected classes."
+                        }
+                    }
+                    messageFunction.replyTemplate(reply_token,replyMessage)
                     break;
                 default:
                     messageFunction.replyText(reply_token,"not in any intent.")

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { insertClassroom } from '../../mongoDBFunction'
-import { Body } from '../../style'
+import { Body, Header2 } from '../../style'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -104,12 +104,12 @@ const themeButtonCancel = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        color: '#11336C',
+        color: '#DC143C',
         fontSize: "18px",
         fontWeight: "500",
         backgroundColor: "white",
         height: "50px",
-        border: "solid 2px"
+        border: "solid 1px"
       }
     }
   },
@@ -325,7 +325,7 @@ class CreateClassroom extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-          <h3><p> Create new classroom </p></h3>
+          <Header2> Create new classroom </Header2>
           <MaterialUIForm onSubmit={this.submitForm} style={{display: 'flex', flexWrap: 'wrap'}}>
             <Grid item xs={12}>
               <MuiThemeProvider theme={theme}>

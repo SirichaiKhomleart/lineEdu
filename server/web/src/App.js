@@ -4,6 +4,9 @@ import { HomePage } from './screen/homepage/index.js'
 import CreateClassroom from './screen/createClassroom/index.js'
 import SuccessCreateClass from './screen/successCreateClass/index.js'
 import AddUser from './screen/addUser/index.js'
+import MakeAnnounce from './screen/makeAnnounce/index.js'
+import AnnounceSuccess from './screen/makeAnnounce/success.js'
+
 
 class App extends Component {
 
@@ -23,6 +26,8 @@ class App extends Component {
         <Route exact path="/createClassroom" component={CreateClassroom}></Route>
         <Route exact path="/successCreateClass" component={SuccessCreateClass}></Route>
         <Route exact path="/addUser" component={AddUser}></Route>
+        <Route exact path="/makeAnnounce" component={MakeAnnounce}></Route>
+        <Route exact path="/makeAnnounceSuccess" component={AnnounceSuccess}></Route>
       </div>
     );
   }

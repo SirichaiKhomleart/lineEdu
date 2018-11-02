@@ -2,6 +2,7 @@ const classroomAction = require('../DBaction/classroom')
 const userAction = require('../DBaction/user')
 const classCodeAction = require('../DBaction/classCode')
 const mainServerFunction = require('../mainFunction/index.js');
+const announcementFunction = require('../mainFunction/announcementFunction.js');
 const user = require('../model/user')
 const classroom = require('../model/classroom')
 const dialogflowFunction = require('../dialogflow/index.js');
@@ -26,6 +27,13 @@ module.exports = (router) => {
             })
             // mainServerFunction.addNewUser();
         });
+
+    // ******************* Classroom route ******************* //
+    router
+        .get('/getAllClassroom', async (req, res) => {
+            console.log("getAllClassroom coming request");
+            classroomAction.getAllClassroom(res);
+        })
     
     router
         .post('/insertClassroom', async (req, res) => {
@@ -62,7 +70,15 @@ module.exports = (router) => {
                 })
             })
         })
+
+    router
+        .post('/getClassById', async (req, res) => {
+            console.log("getClassById coming request");
+            let result = await classroomAction.getClassById(req.body.classId);
+            res.send(result)
+        })
     
+    // ******************* User route ******************* //
     router
         .post('/addUser', async (req, res) => {
             console.log("addUser coming request");
@@ -77,40 +93,18 @@ module.exports = (router) => {
         })
 
     router
-        .post('/getAllClassroom', async (req, res) => {
-            console.log("getAllClassroom coming request");
-            classroomAction.getAllClassroom(res);
+        .post('/getUserByUserID', async (req, res) => {
+            console.log("getUserByUserID coming request");
+            let user = await userAction.findByUserID(req.body.userId);
+            res.send(user)
         })
-    
-    // router.route('/')
-        // .get(function(req, res) {
-        //     // do what for get request in /api/
-        //     //res.json({ message: 'API Initialized!'});
-        //  }).post(async function(req, res) {
-        //     // do what for post request in /api/
-        //     if (!req.body) {
-        //         return res.sendStatus(400);
-        //     }
-        //     res.setHeader('Content-Type', 'application/json');
-        //     console.log(req.body);
-        //     let responseObj = {};
-        //     if (req.body && req.body.queryResult && req.body.queryResult.intent && req.body.queryResult.intent.displayName) {
-        //         console.log(req.body.queryResult.intent.displayName);
-        //         switch (req.body.queryResult.intent.displayName) {
-        //             case "createClassroom":
-        //                 responseObj =  await createClassIntent.createClass();
-        //                 break;
-        //             case "listClassroom":
-        //                 responseObj =  await listClassIntent.listClass();
-        //                 break;
-        //             case "listCommand":
-        //                 responseObj =  await listCommandIntent.listCommand();
-        //                 break;
-        //             default:
-        //                 break;
-        //         }
-        //     }
-        //     console.log("response Obj : ",responseObj);
-        //     res.json(responseObj);
-        //  });
+
+    // ******************* User route ******************* //
+    router
+        .post('/annoucement', async (req, res) => {
+            console.log("annoucement coming request");
+            announcementFunction.announce(req,res);
+        })
+
+        
 }

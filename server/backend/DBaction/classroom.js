@@ -1,17 +1,12 @@
 const classroom = require('../model/classroom')
 
 module.exports = {
-    getClassroom: (req, res, next) => {
-        classroom.findById(req.params.id, (err, classroom) => {
+    getClassById: async (classId) => {
+        let res = await classroom.findById(classId, (err) => {
             if (err)
-                res.send(err)
-            else if (!classroom)
-                res.send(404)
-            else{
-                res.send(classroom)
-            }
-            next(classroom)
+                console.log(err)
         })
+        return res
     },
     getAllClassroom: (res) => {
         classroom.find({}, (err, classroom) => {

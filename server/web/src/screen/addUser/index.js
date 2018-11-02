@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { addNewUser } from '../../mongoDBFunction'
-import { Body } from '../../style'
+import { Body, Header2 } from '../../style'
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
@@ -54,12 +54,12 @@ const themeButtonCancel = createMuiTheme({
   overrides: {
     MuiButton: {
       root: {
-        color: '#27973D',
+        color: '#DC143C',
         fontSize: "18px",
         fontWeight: "500",
         backgroundColor: "white",
         height: "50px",
-        border: "solid 2px"
+        border: "solid 1px"
       }
     }
   },
@@ -141,7 +141,7 @@ class AddUser extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-          <h3><p style={{color:"#27973D"}}> Registeration form </p></h3>
+          <Header2 style={{color:"#27973D", marginBottom: "15px"}}> Registeration form </Header2>
           <MaterialUIForm onSubmit={this.submitForm} style={{display: 'flex', flexWrap: 'wrap'}}>
             <Grid item xs={12}>
               <MuiThemeProvider theme={theme}>

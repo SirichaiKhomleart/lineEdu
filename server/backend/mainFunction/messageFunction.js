@@ -14,16 +14,11 @@ function curl(method, body) {
 	})
 }
 
-function push(msg) {
+function push(userId,msg) {
 	let body = JSON.stringify({
 		// push body
-		to: 'Uc9e7b76b053d02ed8627898987f219a3',
-		messages: [
-			{
-				type: 'text',
-				text: msg
-			}
-		]
+		to: userId,
+		messages: [msg]
 	})
 	curl('push', body)
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Body, FlexCenter } from '../../style'
+import { Body, FlexCenter, Header2 } from '../../style'
 import TextField from '@material-ui/core/TextField';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -81,7 +81,7 @@ class SuccessCreateClass extends Component {
     return (
       <Body>
         <Grid item xs={12}>
-            <h2><p> New Classroom Success </p></h2>
+            <Header2> New Classroom Success </Header2>
             <FlexCenter>
               <FlexCenter flexDirection="row" >
                 <img src={Success} style={{height: "150px"}}/>

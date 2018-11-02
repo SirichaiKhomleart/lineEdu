@@ -6,12 +6,6 @@ const passLocalFunction = require('./mainFunction/passLocalFunction.js');
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
-var https = require('https')
-var fs = require('fs')
-var options = {  
-    key: fs.readFileSync('./key.pem', 'utf8'),  
-    cert: fs.readFileSync('./server.crt', 'utf8')  
-};
 
 var app = express();
 var router = express.Router();
