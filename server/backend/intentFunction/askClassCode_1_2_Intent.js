@@ -93,7 +93,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
     }
 
     console.log(owner);
-    console.log(scoreListSection);
+    console.log(scoreList);
     // console.log(coInstructorList);
 
 
