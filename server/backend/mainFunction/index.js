@@ -88,7 +88,7 @@ mainServerHandlePostBack = async (body) => {
         let list = incomingData.split(":");
         switch (list[0]) {
             case "joinClass":
-                postbackFunction.joinClass(list[1],list[2],list[3],userId)
+                postbackFunction.joinClass(list[1],list[2],list[3],list[4],userId,reply_token)
                 break;
             default:
                 

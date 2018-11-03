@@ -153,7 +153,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                     "action": {
                         "type": "postback",
                         "label": "JOIN THIS CLASS",
-                        "data": "joinClass:"+by+":"+classCode+":"+classroom._id
+                        "data": "joinClass:"+by+":"+classCode+":"+classroom._id+":"+classroom.className
                     },
                     "color": "#7B06FF",
                     "style": "primary",
