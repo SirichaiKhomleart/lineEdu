@@ -99,7 +99,7 @@ module.exports = (router) => {
             res.send(user)
         })
 
-    // ******************* User route ******************* //
+    // ******************* Announcement route ******************* //
     router
         .post('/annoucement', async (req, res) => {
             console.log("annoucement coming request");

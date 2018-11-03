@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import logo from '../../asset/lineLOGO.jpg'
 import { getAllClassroom } from '../../mongoDBFunction'
 
-const liff = window.liff
-
 export class HomePage extends Component {
 
   constructor(props) {
@@ -15,39 +13,14 @@ export class HomePage extends Component {
       statusMessage : '',
       class: {}
     }
-    this.initialize = this.initialize.bind(this)
-    this.closeApp = this.closeApp.bind(this)
   }
 
   async componentDidMount () {
-    window.addEventListener('load', this.initialize);
     let data = await getAllClassroom()
     this.setState({
       class: data
     })
     console.log(this.state.class)
-  }
-
-  initialize() {
-    liff.init(async (data) => {
-      let profile = await liff.getProfile()
-      this.setState({
-        displayName: profile.displayName,
-        userId: profile.userId,
-        pictureUrl: profile.pictureUrl,
-        statusMessage: profile.statusMessage
-      })
-    })
-  }
-
-  closeApp(event) {
-    event.preventDefault()
-    liff.sendMessages([{
-      type: 'text',
-      text: 'Thank you, Bye!'
-    }]).then(() => {
-      liff.closeWindow()
-    })
   }
 
   render() {

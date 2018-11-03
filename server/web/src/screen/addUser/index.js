@@ -41,25 +41,11 @@ const themeButton = createMuiTheme({
         fontSize: "18px",
         fontWeight: "300",
         backgroundColor: "#27973D",
-        height: "50px"
-      }
-    }
-  },
-  typography: {
-    useNextVariants: true,
-  }
-});
-
-const themeButtonCancel = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        color: '#DC143C',
-        fontSize: "18px",
-        fontWeight: "500",
-        backgroundColor: "white",
         height: "50px",
-        border: "solid 1px"
+        '&$disabled': {
+          color: "white",
+          backgroundColor: "gray",
+        }
       }
     }
   },
@@ -81,7 +67,6 @@ class AddUser extends Component {
       fullName: ""
     }
     this.initialize = this.initialize.bind(this)
-    this.closeApp = this.closeApp.bind(this)
   }
 
   componentDidMount () {
@@ -97,10 +82,6 @@ class AddUser extends Component {
         displayName: profile.displayName
       })
     })
-  }
-
-  closeApp() {
-    liff.closeWindow()
   }
 
   handleFullnameChange = (event) => {
@@ -170,6 +151,7 @@ class AddUser extends Component {
                     shrink: true,
                   }}
                   placeholder="(Optional)"
+                  type="email"
                 />
                 <TextField 
                   id="outlined-name"
@@ -183,18 +165,16 @@ class AddUser extends Component {
                     shrink: true,
                   }}
                   placeholder="(Optional)"
+                  helperText={((this.state.phoneNum.length !== 10 || this.state.phoneNum[0] !== "0") && this.state.phoneNum !== "") ? "Your phone number isn't correct format" : ""}
                 />
               </MuiThemeProvider>
             </Grid>
             <Grid item xs={12} style={{display: "flex", flexDirection: "column", marginTop: "20px"}}>
               <MuiThemeProvider theme={themeButton}>
-                <Button type="submit">
+                <Button type="submit"
+                  disabled={(this.state.fullName === "") ? true : false}
+                >
                   Done
-                </Button>
-              </MuiThemeProvider>
-              <MuiThemeProvider theme={themeButtonCancel}>
-                <Button style={{marginTop: "10px"}} onClick={this.closeApp}>
-                  Cancel
                 </Button>
               </MuiThemeProvider>
             </Grid>

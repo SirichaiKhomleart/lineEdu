@@ -28,7 +28,11 @@ class MakeAnnounce extends Component {
   }
 
   async componentDidMount () {
-    let user = await getUserByUserID({userId: "Ubab717ae1162a07a32154640a5f4f1e8"});
+    await window.addEventListener('load', this.initialize);
+    let user = await getUserByUserID({userId: this.state.userId});
+    if (this.state.userId === "") {
+      user = await getUserByUserID({userId: "Ubab717ae1162a07a32154640a5f4f1e8"});
+    }
     let allClassList = await Promise.all(user.userCoClassList.map(async (data) => {
       let result = await getClassById(data);
       return {
@@ -43,8 +47,6 @@ class MakeAnnounce extends Component {
     
     console.log("user",user);
     console.log("allClassList",allClassList);
-
-    window.addEventListener('load', this.initialize);
   }
 
   initialize() {
@@ -135,7 +137,8 @@ class MakeAnnounce extends Component {
       let sendedData = {
         selectedClass: selectedClass,
         message: message,
-        sender: userFullName
+        sender: userFullName,
+        sender: userId
       }
       let data = await announceMsg(sendedData);
       console.log(data);

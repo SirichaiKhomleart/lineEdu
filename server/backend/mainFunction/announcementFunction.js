@@ -71,9 +71,77 @@ announce = (req,res) => {
                 }
               }
             console.log("msg",msg);
-            messageFunction.push(subData.userID,msg)
+            messageFunction.push(subData.userID,[msg])
         })
     })
+    let reveiwMsg = [{
+      type: "text",
+      text: "Okay, message already sent to everyone in class(es)! Here is the preview."
+    },{
+      "type": "flex",
+      "altText": "Flex Message",
+      "contents": {
+        "type": "bubble",
+        "header": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "text",
+              "text": "ANNOUNCEMENT",
+              "size": "sm",
+              "weight": "bold",
+              "color": "#7B06FF",
+              "wrap": true
+            },
+            {
+              "type": "text",
+              "text": req.body.selectedClass.join(", "),
+              "size": "lg",
+              "wrap": true
+            }
+          ]
+        },
+        "body": {
+          "type": "box",
+          "layout": "horizontal",
+          "spacing": "md",
+          "contents": [
+            {
+              "type": "text",
+              "text": req.body.message,
+              "gravity": "center",
+              "wrap": true
+            }
+          ]
+        },
+        "footer": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "separator"
+            },
+            {
+              "type": "text",
+              "text": "Announced by",
+              "margin": "md",
+              "size": "xxs",
+              "color": "#FF0665",
+              "wrap": true
+            },
+            {
+              "type": "text",
+              "text": "  " + req.body.sender,
+              "size": "xs",
+              "wrap": true
+            }
+          ]
+        }
+      }
+    }]
+    messageFunction.push(req.body.senderId,reveiwMsg)
+    
     res.send(200)
 }
 

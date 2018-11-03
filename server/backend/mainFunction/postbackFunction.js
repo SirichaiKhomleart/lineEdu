@@ -11,14 +11,25 @@ async function joinClass(by, classCode, classID, className, from, reply_token) {
     console.log(from);
 
     if (by == "Private") {
-        await user.joinClassAsCo(classCode, classID, from)
+        let result = await user.joinClassAsCo(classCode, classID, from)
         await classroom.addCo(classCode, classID, from)
         await classCodes.deleteClassCodePrivate(classCode)
+        if (result.nModified === 0) {
+            messageFunction.replyText(reply_token,"You are already be a instructor assistant of " + className + " class.")
+        } else {
+            messageFunction.replyText(reply_token,"Welcome to the " + className + " class.");
+        }
     } else {
-        await user.joinClassAsStudent(classCode, classID, from)
+        let result2 = await user.joinClassAsStudent(classCode, classID, from)
         await classroom.addStudent(classCode, classID, from)
+        if (result2.nModified === 0) {
+            messageFunction.replyText(reply_token,"You are already be a student of " + className + " class.")
+        } else {
+            messageFunction.replyText(reply_token,"Welcome to the " + className + " class. You will get notifications from this class' activities.");
+        }
     }
-    messageFunction.replyText(reply_token,"Welcome to the " + className + " class. You will get notifications from this class' activities.")
+
+
 }
 
 

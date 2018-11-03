@@ -42,7 +42,7 @@ module.exports = {
     },
     joinClassAsCo: async (classCode, classID, from) => {
         let result = await user.updateOne({userID: from}, { $addToSet: { userCoClassList: classID }})
-        console.log(result);
+        return result
     },
     joinClassAsStudent: async (classCode, classID, from) => {
         let result = await user.updateOne({userID: from}, { $addToSet: { userJoinedClassList: classID }}, (err) => {
@@ -51,7 +51,7 @@ module.exports = {
             }
         })
         // let result = await user.find({userID: from})
-        console.log(result);
+        return result
 
     }
 }

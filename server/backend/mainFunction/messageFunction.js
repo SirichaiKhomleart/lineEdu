@@ -18,7 +18,7 @@ function push(userId,msg) {
 	let body = JSON.stringify({
 		// push body
 		to: userId,
-		messages: [msg]
+		messages: msg
 	})
 	curl('push', body)
 }

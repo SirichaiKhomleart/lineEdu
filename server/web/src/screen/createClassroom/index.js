@@ -34,6 +34,11 @@ const theme = createMuiTheme({
       focused: {
         borderColor: "#11336C"
       }
+    },
+    MuiFormControl: {
+      root: {
+        width: "100%"
+      }
     }
   },
   typography: {
@@ -91,25 +96,11 @@ const themeButton = createMuiTheme({
         fontSize: "18px",
         fontWeight: "300",
         backgroundColor: "#11336C",
-        height: "50px"
-      }
-    }
-  },
-  typography: {
-    useNextVariants: true,
-  }
-});
-
-const themeButtonCancel = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        color: '#DC143C',
-        fontSize: "18px",
-        fontWeight: "500",
-        backgroundColor: "white",
         height: "50px",
-        border: "solid 1px"
+        '&$disabled': {
+          backgroundColor: "gray",
+          color: 'white'
+        }
       }
     }
   },
@@ -125,18 +116,12 @@ class CreateClassroom extends Component {
     this.state = {
       className: "",
       classDesc: "",
-      scoreSection: [
-        {
-          sectionName: "",
-          score: ""
-        }
-      ],
+      scoreSection: [],
       moreInfo: [],
       currentMoreInfo: "",
       userId: ""
     }
     this.initialize = this.initialize.bind(this)
-    this.closeApp = this.closeApp.bind(this)
   }
 
   componentDidMount () {
@@ -150,11 +135,6 @@ class CreateClassroom extends Component {
         userId: profile.userId
       })
     })
-  }
-
-  closeApp(event) {
-    event.preventDefault()
-    liff.closeWindow()
   }
 
   handleClassNameChange = (event) => {
@@ -310,7 +290,7 @@ class CreateClassroom extends Component {
               type="number"
               required
             />
-            <Icon style={{color: "gray", fontSize: "25px", paddingLeft: "15px", display: (key === 0 ? "none" : "initial")}}
+            <Icon style={{color: "gray", fontSize: "25px", paddingLeft: "15px"}}
               onClick={() => this.deleteScoreSection(key)}  
             >
               clear
@@ -413,13 +393,8 @@ class CreateClassroom extends Component {
             </Grid>
             <Grid item xs={12} style={{display: "flex", flexDirection: "column", marginTop: "20px"}}>
               <MuiThemeProvider theme={themeButton}>
-                <Button type="submit">
+                <Button type="submit" disabled={(this.state.className === "") ? true : false}>
                   Submit
-                </Button>
-              </MuiThemeProvider>
-              <MuiThemeProvider theme={themeButtonCancel}>
-                <Button style={{marginTop: "10px"}} onClick={this.closeApp}>
-                  Cancel
                 </Button>
               </MuiThemeProvider>
             </Grid>

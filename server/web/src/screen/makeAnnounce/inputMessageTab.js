@@ -66,25 +66,11 @@ const themeButton = createMuiTheme({
         fontSize: "18px",
         fontWeight: "300",
         backgroundColor: "#7B06FF",
-        height: "50px"
-      }
-    }
-  },
-  typography: {
-    useNextVariants: true,
-  }
-});
-
-const themeButtonCancel = createMuiTheme({
-  overrides: {
-    MuiButton: {
-      root: {
-        color: '#DC143C',
-        fontSize: "18px",
-        fontWeight: "500",
-        backgroundColor: "white",
         height: "50px",
-        border: "solid 1px"
+        '&$disabled': {
+          color: "white",
+          backgroundColor: "gray"
+        }
       }
     }
   },
@@ -156,13 +142,10 @@ class InputMessageTab extends Component {
         </Grid>
         <Grid item xs={12} style={{display: "flex", flexDirection: "column", marginTop: "20px"}}>
             <MuiThemeProvider theme={themeButton}>
-                <Button type="submit">
+                <Button type="submit"
+                  disabled={(message === "" || selectedClassName.length === 0) ? true : false}  
+                >
                     Done
-                </Button>
-            </MuiThemeProvider>
-            <MuiThemeProvider theme={themeButtonCancel}>
-                <Button style={{marginTop: "10px"}} onClick={closeAppFunc}>
-                    Cancel
                 </Button>
             </MuiThemeProvider>
         </Grid>
