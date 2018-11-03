@@ -70,9 +70,9 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
     if (classroom.classScore.length === 0) {
       scoreList = [{
         "type": "text",
-        "text": "Score Distribution",
-        "weight": "bold",
-        "color": "#7B06FF"
+        "text": "This class has no score distribution.",
+        "size": "xs",
+        "wrap": true
       }]
     }
     if (classroom.classCoList.length !== 0) {
@@ -200,7 +200,8 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                   {
                     "type": "text",
                     "text": "Instructor & Scores Distribution",
-                    "size": "lg"
+                    "size": "lg",
+                    "wrap": true
                   },
                   {
                     "type": "separator",
@@ -230,7 +231,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                         "contents": [
                           {
                             "type": "image",
-                            "url": "https://timedotcom.files.wordpress.com/2014/05/rtr3pxzh.jpg",
+                            "url": owner[0].userPicURL,
                             "flex": 1,
                             "align": "center",
                             "gravity": "center",
@@ -249,7 +250,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                             "contents": [
                               {
                                 "type": "text",
-                                "text": "Assc. Prof. Prayut Chan-o-cha",
+                                "text": owner[0].userFullName,
                                 "flex": 3,
                                 "align": "start",
                                 "gravity": "bottom",
@@ -258,7 +259,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                               },
                               {
                                 "type": "text",
-                                "text": "emailll",
+                                "text": owner[0].userEmail,
                                 "flex": 1,
                                 "size": "xs",
                                 "color": "#FF0665",
@@ -280,13 +281,7 @@ sendClassDetail = async (reply_token,classroom,by,classCode) => {
                       {
                         "type": "box",
                         "layout": "vertical",
-                        "contents": [
-                          {
-                            "type": "text",
-                            "text": "This class has no instructor assistance.",
-                            "size": "xs"
-                          }
-                        ]
+                        "contents": coInstructorList
                       }
                     ]
                   },
