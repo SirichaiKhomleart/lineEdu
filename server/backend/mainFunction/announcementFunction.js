@@ -141,7 +141,6 @@ announce = (req,res) => {
       }
     }]
     messageFunction.push(req.body.senderId,reveiwMsg)
-    
     res.send(200)
 }
 

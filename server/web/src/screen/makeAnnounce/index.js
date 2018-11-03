@@ -138,7 +138,7 @@ class MakeAnnounce extends Component {
         selectedClass: selectedClass,
         message: message,
         sender: userFullName,
-        sender: userId
+        senderId: userId
       }
       let data = await announceMsg(sendedData);
       console.log(data);
