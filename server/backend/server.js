@@ -6,6 +6,10 @@ const passLocalFunction = require('./mainFunction/passLocalFunction.js');
 var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var multer = require('multer');
+var path = require('path')
+var fs = require('fs');
+var shell = require('shelljs');
 
 var app = express();
 var router = express.Router();
@@ -21,6 +25,31 @@ let db = mongoose.connection;
 db.once("open", () => console.log("connected to the database"));
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 
+const storageDir = path.join(__dirname,"..","files")
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        // console.log(req);
+        var newDestination = storageDir+'/' + req.headers.path;
+        var stat = null;
+        try {
+            if (!fs.existsSync(newDestination)){
+                shell.mkdir('-p', newDestination);
+            }
+            stat = fs.statSync(newDestination);
+        } catch (err) {
+            fs.mkdirSync(newDestination);
+        }
+        if (stat && !stat.isDirectory()) {
+            throw new Error('Directory cannot be created because an inode of a different type exists at "' + dest + '"');
+        }       
+        cb(null, newDestination);
+    },
+    filename(req, file, cb) {
+        cb(null, `${file.originalname}`);
+    },
+});
+const upload = multer({ storage });
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
@@ -34,6 +63,8 @@ app.use(function(req, res, next) {
 });
 routes(router)
 app.use('/api', router);
+app.set('storageDir',storageDir);
+app.set('upload',upload)
 
 // var secureServerAPI = https.createServer(options, app).listen(apiPort, () => {  
 //     console.log(`api running on port ${apiPort}`); 
@@ -89,3 +120,20 @@ router.post('/webhook', async (req, res) => {
         mainServerFunction.mainServerHandle(req.body.events[0])
     }
 })
+
+
+// ******************* file route ******************* //
+    router
+        .post('/upload', upload.array('files'),(req, res) => {
+            console.log("upload coming request", req.files);
+            let path = req.headers.path.split("/");
+            path.push(req.files[0].originalname);
+            path = path.join("%2F")
+            res.send("http://35.186.146.98:3001/api/download/"+path)
+        })
+
+    router
+        .get('/download/:des', function(req, res){
+            var file = storageDir + req.params.des;
+            res.download(file);
+          });

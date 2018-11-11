@@ -77,6 +77,27 @@ module.exports = (router) => {
             let result = await classroomAction.getClassById(req.body.classId);
             res.send(result)
         })
+
+    router
+        .post('/getChapListByClassId', async (req, res) => {
+            console.log("getChapListByClassId coming request");
+            let result = await classroomAction.getChapListByClassId(req.body.classId);
+            res.send(result)
+        })
+
+    router
+        .post('/insertChapter', async (req, res) => {
+            console.log("insertChapter coming request");
+            let result = await classroomAction.insertChapter(req.body.classId,req.body.chapterName);
+            res.send(result)
+        })
+    
+    router
+        .post('/insertUploadHis', async (req, res) => {
+            console.log("insertUploadHis coming request");
+            let result = await classroomAction.insertUploadHis(req.body.data,req.body.metaData.classId,req.body.metaData.chapId);
+            announcementFunction.uploadNewLec(req,res);
+        })
     
     // ******************* User route ******************* //
     router
@@ -105,6 +126,10 @@ module.exports = (router) => {
             console.log("annoucement coming request");
             announcementFunction.announce(req,res);
         })
-
+    router
+        .post('/uploadConfirm', async (req, res) => {
+            console.log("uploadConfirm coming request");
+            announcementFunction.uploadConfirm(req,res);
+        })
         
 }

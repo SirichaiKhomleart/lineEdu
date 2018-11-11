@@ -27,3 +27,31 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  width: 100%;
+  height: 35px;
+  padding-bottom: 5px;
+}
+
+.btn {
+  color: white;
+  background-color: #17A085;
+  border-radius: 10px;
+  font-size: 12px;
+  width: 100%;
+  height: 100%;
+  border: 0px;
+  margin-top: 5px
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}

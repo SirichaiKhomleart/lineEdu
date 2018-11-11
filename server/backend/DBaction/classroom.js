@@ -66,8 +66,24 @@ module.exports = {
     },
     addStudent: async (classCode, classID, from) => {
         let result = await classroom.updateOne({ classPublicKey: classCode, 'classStudentList.userID': {$ne: from} },
-            { $push: { classStudentList: { userID: from }
-        }})
+            { $push: { classStudentList: { userID: from }}}
+        )
         console.log(result);
-    }
+    },
+    getChapListByClassId: async (classID) => {
+        let result = await classroom.findOne({_id: classID},{'classLec.chapterName': 1, 'classLec._id': 1})
+        return result
+    },
+    insertChapter: async (classID,chapterName) => {
+        let result = await classroom.updateOne({_id: classID, 'classLec.chapterName': {$ne: chapterName}},
+            { $push: { classLec: { chapterName: chapterName }}}
+        )
+        return result
+    },
+    insertUploadHis: async (data,classID,chapID) => {
+        let result = await classroom.updateOne({_id: classID, 'classLec._id': chapID},
+            { $push: { 'classLec.$.uploadedList': data}}
+        )
+        return result
+    },
 }

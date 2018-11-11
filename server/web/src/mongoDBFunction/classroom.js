@@ -29,3 +29,23 @@ export async function getClassById(data) {
         })
     return response.data
 }
+
+export async function getChapListByClassID(data) {
+    let response = await axios.post('/api/getChapListByClassId',
+        {classId: data},{
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+    return response.data
+}
+
+export async function insertChapter(classId, chapterName) {
+    let response = await axios.post('/api/insertChapter',
+        {classId: classId, chapterName: chapterName},{
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+    return response.data
+}
