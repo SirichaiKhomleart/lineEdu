@@ -77,7 +77,6 @@ announce = (req,res) => {
     if (req.body.selectedClassName.length === 1) {
       announceClass = req.body.selectedClassName[0]
     }
-    console.log("className",req.body.sender,req.body.message)
     let reveiwMsg = [{
       type: "text",
       text: "Okay, message already sent to everyone in class(es)! Here is the preview."
@@ -270,7 +269,7 @@ uploadNewLec = async (req,res) => {
           }
         }
       }
-      console.log("msg",msg);
+      console.log("msg",JSON.stringify(msg));
       messageFunction.push(subData.userID,[msg])
   })
   res.send(200)
@@ -368,6 +367,7 @@ uploadConfirm = async (req,res) => {
       }
     }
   }]
+  console.log(JSON.stringify(reveiwMsg));
   messageFunction.push(req.body.senderId,reveiwMsg)
   res.send(200)
 }
