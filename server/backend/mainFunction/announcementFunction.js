@@ -201,7 +201,7 @@ uploadNewLec = async (req,res) => {
                 "contents": [
                   {
                     "type": "image",
-                    "url": "https://lineedu.net/images/file.svg",
+                    "url": "https://lineedu.net/images/file.jpg",
                     "flex": 1
                   },
                   {
@@ -269,7 +269,6 @@ uploadNewLec = async (req,res) => {
           }
         }
       }
-      console.log("msg",JSON.stringify(msg));
       messageFunction.push(subData.userID,[msg])
   })
   res.send(200)
@@ -313,7 +312,7 @@ uploadConfirm = async (req,res) => {
             "contents": [
               {
                 "type": "image",
-                "url": "https://lineedu.net/images/file.svg",
+                "url": "https://lineedu.net/images/file.jpg",
                 "flex": 1
               },
               {
@@ -367,7 +366,6 @@ uploadConfirm = async (req,res) => {
       }
     }
   }]
-  console.log(JSON.stringify(reveiwMsg));
   messageFunction.push(req.body.senderId,reveiwMsg)
   res.send(200)
 }
