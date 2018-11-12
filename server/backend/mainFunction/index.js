@@ -80,7 +80,7 @@ async function mainServerHandle(body){
                             {
                             "type": "uri",
                             "label": "OK",
-                            "uri": liffList.makeAnnounce
+                            "uri": liffList.uploadLec
                             }
                         ],
                         "text": "You can fill the form in this link to upload new lecture note to selected classes."

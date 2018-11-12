@@ -141,6 +141,7 @@ class MakeAnnounce extends Component {
         sender: userFullName,
         senderId: userId
       }
+      console.log(selectedClassName);
       let data = await announceMsg(sendedData);
       console.log(data);
       this.props.history.push({
