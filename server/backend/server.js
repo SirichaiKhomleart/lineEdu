@@ -135,7 +135,7 @@ router.post('/webhook', async (req, res) => {
         .post('/upload', upload.array('files'),(req, res) => {
             console.log("upload coming request", req.files);
             let path = req.headers.path.split("/");
-            path.push(req.files[0].originalname);
+            path.push(req.files[0].originalname.split("").join("%20"));
             path = path.join("%2F")
             res.send("http://35.220.199.11:3001/api/download/"+path)
         })

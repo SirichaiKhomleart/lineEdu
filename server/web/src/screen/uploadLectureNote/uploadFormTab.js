@@ -121,7 +121,7 @@ class UploadFormTab extends Component {
     if (selectedClassName.length === 1) {
         text = selectedClassName[0]
     } else if (selectedClassName.length > 1){
-        text = selectedClassName[0] + " " + selectedClassAndChap[0].chap + " and " + (selectedClassName.length-1) + " other(s)"
+        text = selectedClassName[0] + " : " + selectedClassAndChap[0].chapName + " and " + (selectedClassName.length-1) + " other(s)"
     }
     return(
         <Text> {text} </Text>
