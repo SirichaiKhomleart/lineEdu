@@ -134,11 +134,15 @@ class UploadFormTab extends Component {
         <MaterialUIForm onSubmit={submitFunc} style={{display: 'flex', flexWrap: 'wrap'}}>
         <Grid item xs={12} style={{display: "flex"}}>
             <Grid item xs={4} style={{paddingRight: "10px", paddingTop: "16px"}}>
-                <FlexCenter style={{border: "1px solid gray", borderRadius: "10px", height: "150px", width: "100%", alignItems: "center"}}>
+                <FlexCenter style={{border: "1px solid gray", borderRadius: "10px", height: "150px", width: "100%", alignItems: "center", color: "gray"}}>
                   <i className="material-icons" style={{fontSize: "70px", display:(file === false) ? "none" : "flex"}}>
                     description
                   </i>
-                  <Text style={{display:(file === false) ? "none" : "flex"}}> File attached </Text>
+                  <Text style={{display:(file === false) ? "none" : "flex"}}> File is attached </Text>
+                  <i class="material-icons" style={{fontSize: "65px", display:(file !== false) ? "none" : "flex"}}>
+                    attach_file
+                  </i>
+                  <Text style={{display:(file !== false) ? "none" : "flex"}}> Attach File Here </Text>
                 </FlexCenter>
                 <MuiThemeProvider theme={themeButtonUpload}>
                     <div className="upload-btn-wrapper">

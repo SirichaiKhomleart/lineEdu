@@ -70,6 +70,25 @@ async function mainServerHandle(body){
                     }
                     messageFunction.replyTemplate(reply_token,replyMessage)
                     break;
+                case 'uploadLec':
+                    replyMessage = {
+                        "type": "template",
+                        "altText": "this is a buttons template",
+                        "template": {
+                        "type": "buttons",
+                        "actions": [
+                            {
+                            "type": "uri",
+                            "label": "OK",
+                            "uri": liffList.makeAnnounce
+                            }
+                        ],
+                        "text": "You can fill the form in this link to upload new lecture note to selected classes."
+                        }
+                    }
+                    messageFunction.replyTemplate(reply_token,replyMessage)
+                    break;
+                    
                 default:
                     messageFunction.replyText(reply_token,"not in any intent.")
             }

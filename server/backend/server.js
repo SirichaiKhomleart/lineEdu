@@ -96,7 +96,15 @@ router.post('/webhook', async (req, res) => {
         mainServerFunction.leaveGroup(req.body.events[0])
     } else if (req.body.events && req.body.events[0].type == "postback"){
         if (!(req && req.body && req.body.passing)) {
-            passLocalFunction.passToMak(req.body)            
+            let incoming = req.body.events[0].postback.data
+            let passTo = incoming.split(":")
+            if (passTo[passTo.length-1] === "mak") {
+                passLocalFunction.passToMak(req.body)                
+            } else if (passTo[passTo.length-1] === "nut") {
+                passLocalFunction.passToNut(req.body)                
+            } else if (passTo[passTo.length-1] === "poom") {
+                passLocalFunction.passToPoom(req.body)
+            }
         } 
         mainServerFunction.mainServerHandlePostBack(req.body.events[0])
     }
@@ -129,7 +137,7 @@ router.post('/webhook', async (req, res) => {
             let path = req.headers.path.split("/");
             path.push(req.files[0].originalname);
             path = path.join("%2F")
-            res.send("http://35.186.146.98:3001/api/download/"+path)
+            res.send("http://35.220.199.11:3001/api/download/"+path)
         })
 
     router

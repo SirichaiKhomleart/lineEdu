@@ -128,7 +128,7 @@ class MakeAnnounce extends Component {
   };
 
   submitForm =  async (values, pristineValues) => {
-    let { selectedClass,message,userId,userFullName } = this.state
+    let { selectedClass,message,userId,userFullName,selectedClassName } = this.state
     if (selectedClass.length === 0) {
       this.setState({
         noti: true
@@ -136,6 +136,7 @@ class MakeAnnounce extends Component {
     } else {
       let sendedData = {
         selectedClass: selectedClass,
+        selectedClassName: selectedClassName,
         message: message,
         sender: userFullName,
         senderId: userId

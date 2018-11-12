@@ -41,13 +41,13 @@ tunels.forEach((options, key) => {
 
 function setLocalhost(url){
   request.post({
-  url: `http://35.186.146.98:3001/getConnect`,
+  url: `http://35.220.199.11:3001/getConnect`,
     headers: {
             'Content-Type': 'application/json'
         },
         json: true,
     body: {
-      source: "mak",
+      source: "nut",
       localhost: url
     }
   }, (err, res, body) => {

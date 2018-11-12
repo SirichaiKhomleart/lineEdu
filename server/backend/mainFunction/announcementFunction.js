@@ -73,6 +73,10 @@ announce = (req,res) => {
             messageFunction.push(subData.userID,[msg])
         })
     })
+    let announceClass = req.body.selectedClassName.join(", ");
+    if (req.body.selectedClassName.length === 1) {
+      announceClass = req.body.selectedClassName[0]
+    }
     let reveiwMsg = [{
       type: "text",
       text: "Okay, message already sent to everyone in class(es)! Here is the preview."
@@ -95,7 +99,7 @@ announce = (req,res) => {
             },
             {
               "type": "text",
-              "text": req.body.selectedClass.join(", "),
+              "text": announceClass,
               "size": "lg",
               "wrap": true
             }

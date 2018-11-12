@@ -111,6 +111,7 @@ module.exports = (router) => {
                     res.send("user is inserted")
                 }
             });
+            
         })
 
     router
